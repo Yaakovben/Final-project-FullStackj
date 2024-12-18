@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from 'dotenv'
 import cors from 'cors'
 import { connectToMongo } from "./config/db";
-import { seedAttack, seedMain } from "./services/seedService";
+import { seedAttack, seedMain, seedOrganization } from "./services/seedService";
 
 
 dotenv.config()
@@ -21,4 +21,4 @@ connectToMongo()
 // seedMain()
 app.listen(PORT, ()=>{ 
     console.log(`Server is runnig, visit "http://localhost:${PORT}"`);     
-})        
+})          

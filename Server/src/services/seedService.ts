@@ -2,6 +2,7 @@ import fs from 'fs'
 import MainList from '../models/MainListModel'
 import { log } from 'console'
 import AttackModel from '../models/TypesAttackModel'
+import Organization from '../models/OrganizationModel'
 
 
 
@@ -68,7 +69,36 @@ export const seedAttack = async () => {
         }
         console.log(`new attack types saved successfully`);
     } catch (err) {
-        console.error('Error attack types:', err);
+        console.error('Error attack types:',  err);
+        throw err;
+    }
+};
+export const seedOrganization = async () => {
+    try {
+        let number = 0;
+        const data = await MainList.find({}).lean();
+        for (const event of data) {
+            const organizationModel = await Organization.findOne({ name: event.organization });
+            if (!organizationModel) {
+                const newOrganization = new Organization({
+                    name: event.organization,
+                    casualties: event.casualties,
+                    listEvents: [event._id] 
+                });
+                await newOrganization.save(); 
+                number++; 
+                console.log(`Saved new orgization`);
+            } else {
+                await organizationModel.updateOne({
+                    $push: { listEvents: event._id }, 
+                    $inc: { casualties: event.casualties } 
+                });
+                console.log(`Updated  orgization`);
+            }
+        }
+        console.log(`new organization saved successfully`);
+    } catch (err) {
+        console.error('Error organization:', err);
         throw err;
     }
 };

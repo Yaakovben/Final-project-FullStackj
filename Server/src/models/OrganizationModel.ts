@@ -2,13 +2,13 @@ import mongoose, { Schema, Types } from "mongoose";
 
 export  interface IOrganization extends Document {
     name:string,
-    kills:number
+    casualties:number
     listEvents: Types.ObjectId[] 
 }
 
 const organizationSchema = new Schema<IOrganization>({
     name:{type:String},
-    kills:{type:Number},
+    casualties:{type:Number},
     listEvents:{type:[Schema.Types.ObjectId], ref:"MainList"}
 }) 
 
