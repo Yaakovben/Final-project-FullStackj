@@ -39,53 +39,64 @@ export const attackTypeByYears = async ({firstyear,lastyear,fiveYears,tenYears}:
 export const YearsOrganization = async (req: yearsOranizationDTO) => {
     try {
         if (typeof req.req === "number") {
-            const result = await YearModel.aggregate([
-                { $match: { year: req.req } },
-                { $unwind: "$listOrganization" },
-                { 
-                    $group: { 
-                        _id: { organization: "$listOrganization.organization", year: "$year" },
-                        totalEvents: { $sum: "$listOrganization.amount" }
-                    }
-                },
-                { 
-                    $project: {
-                        _id: 0,
-                        organization: "$_id.organization",
-                        year: "$_id.year",
-                        totalEvents: 1
-                    }
-                },
-                { $sort: { totalEvents: -1 } }
-            ]);
-
-            return result;
+            return await byYear(req.req);
         } else if (typeof req.req === "string") {
-            const result = await YearModel.aggregate([
-                { $unwind: "$listOrganization" },
-                { $match: { "listOrganization.organization": req.req } },
-                { 
-                    $group: { 
-                        _id: { year: "$year", organization: "$listOrganization.organization" },
-                        totalIncidents: { $sum: "$listOrganization.amount" }
-                    }
-                },
-                { 
-                    $project: {
-                        _id: 0,
-                        year: "$_id.year",
-                        organization: "$_id.organization",
-                        totalIncidents: 1
-                    }
-                },
-                { $sort: { year: 1 } }
-            ]);
-            return result;
+            return await byOranization(req.req);
         } else {
-            throw new Error("Invalid input type. Must be a number (year) or string (organization).");
+            throw new Error("The field must be a number or year !!!");
         }
     } catch (error) {
-        console.error("Error :", error);
+        console.error("Error:", error);
         throw error;
     }
-}
+};
+
+//(part of 5)
+const byYear = async (year: number) => {
+    return await YearModel.aggregate([
+        { $match: { year } },
+        { $unwind: "$listOrganization" },
+        { 
+            $group: { 
+                _id: { organization: "$listOrganization.organization", year: "$year" },
+                totalEvents: { $sum: "$listOrganization.amount" }
+            }
+        },
+        { 
+            $project: {
+                _id: 0,
+                organization: "$_id.organization",
+                year: "$_id.year",
+                totalEvents: 1
+            }
+        },
+        { $sort: { totalEvents: -1 } }
+    ]);
+};
+
+
+//(part of 5)
+const byOranization = async (organization: string) => {
+    return await YearModel.aggregate([
+        { $unwind: "$listOrganization" },
+        { $match: { "listOrganization.organization": organization } },
+        { 
+            $group: { 
+                _id: { year: "$year", organization: "$listOrganization.organization" },
+                totalIncidents: { $sum: "$listOrganization.amount" }
+            }
+        },
+        { 
+            $project: {
+                _id: 0,
+                year: "$_id.year",
+                organization: "$_id.organization",
+                totalIncidents: 1
+            }
+        },
+        { $sort: { year: 1 } }
+    ]);
+};
+
+
+
