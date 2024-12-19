@@ -3,8 +3,8 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import { connectToMongo } from "./config/db";
 import { seedAttack, seedMain, seedOrganization } from "./services/seedService";
-import tyoesAttackRoter from './routers/typesAttackRouter'
-
+import typesAttackRoter from './routers/typesAttackRouter'
+import locationRouter from './routers/locationRouter'
 
 dotenv.config()
 const PORT = process.env.PORT || 3000
@@ -18,8 +18,8 @@ app.use(cors({
 
 connectToMongo() 
 
-app.use("/api/typesAttack",tyoesAttackRoter)
-app.use("/api/location",()=>{})
+app.use("/api/typesAttack",typesAttackRoter)
+app.use("/api/location",locationRouter)
 app.use("/api/year",()=>{})
 
 

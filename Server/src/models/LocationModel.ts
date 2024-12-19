@@ -19,6 +19,6 @@ const locatinSchema = new Schema<ILocation>({
 }) 
 
 export default mongoose.model<ILocation>("Location",locatinSchema)
-
+  
 
 

@@ -6,11 +6,10 @@ export const RatingTypesAttacks = async function getTypesAttackByCasualties() {
         const attacks = await TypesAttackModel.find()
             .sort({ casualties: -1 }) 
             .select('-listEvents') 
-            .exec(); 
         return attacks;
-    } catch (error) {
-        console.error("Error fetching types of attacks:", error);
-        throw error;
+    } catch (err) {
+        console.error("[service]Error fetching types of attacks:", err);
+        throw err;   
     }
 };
 
