@@ -13,7 +13,7 @@ export const getYearsOrganization = async(req:Request<any,any,yearsOranizationDT
     }
 }
 
-
+ // (3) יקבל טווח של שנים או 5 או 10 ויחזיר את כמות התקריות שהיו מכל סוג
 export const getattackTypeByYears = async(req:Request<any,any,any,getByDates>,res:Response)=>{
     try {
         const listYears = await attackTypeByYears(req.query)

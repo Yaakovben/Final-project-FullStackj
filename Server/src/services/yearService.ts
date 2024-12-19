@@ -6,7 +6,7 @@ import yearsOranizationDTO from "../types/DTO/getYearsOrganizationDTO";
 
 
 
-
+ // (3) יקבל טווח של שנים או 5 או 10 ויחזיר את כמות התקריות שהיו מכל סוג
 export const attackTypeByYears = async ({firstyear,lastyear,fiveYears,tenYears}:getByDates) => {
     const forTenYears = new Date().getFullYear() - 10;
     const forFiveYears = new Date().getFullYear() - 5;
