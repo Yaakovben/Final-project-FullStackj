@@ -4,8 +4,6 @@ import getTopDTO from "../types/DTO/getTopDTO";
 import topOranizationDTO from "../types/DTO/getTopOrganizationDTO";
 
 
-
-
 //(2) אזורים עם כמות נפגעים הגבוהה ביותר, ובמקרה שישלח אזור נחזיר את כמות הנפגעים הכי גדולה 
 export const placesWithMostCasualties = async(city:getTopDTO) => {
     try {
@@ -25,70 +23,91 @@ export const placesWithMostCasualties = async(city:getTopDTO) => {
             return location  
         }
     } catch (err) {
-        console.error("[service] Error get top loction", err);
+        console.log("[service] Error get top loction",err);
         throw err;    
     }
 }
 
-//(3) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
-export const topOrganizations = async  (city: getTopDTO) => {
+//(4) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
+export const topOrganizations = async (city: getTopDTO)=> {
     try {
         if (!city.city) {
-            const organizations = await OrganizationModel.aggregate([
-                {
-                    $addFields: {
-                        eventsCount: { $size: "$listEvents" } 
-                    }
-                },
-                {
-                    $sort: { eventsCount: -1 }  
-                },
-                {
-                    $limit: 5 
-                },
-                {
-                    $project: {
-                        name: 1, 
-                        eventsCount: 1  
-                    }
-                }
-            ]);
-            return organizations;
+            return await byOrganization();
         }
-        const location = await LocationModel.aggregate([
-            { $match: { city: city.city } }, 
+        return await byCity(city.city);
+    } catch (error) {
+        console.log("[service] Error in topOrganizations:", error);
+        throw error;
+    }
+};
+
+
+// (part of 4) 
+const byOrganization = async () => {
+    try {
+        const organizations = await OrganizationModel.aggregate([
             {
-                $unwind: "$events" 
-            },
-            {
-                $group: {  
-                    _id: "$events.organization", 
-                    totalEvents: { $sum: "$events.amountEvents" }  
+                $addFields: {
+                    eventsCount: { $size: "$listEvents" }
                 }
             },
             {
-                $sort: { totalEvents: -1 }  
+                $sort: { eventsCount: -1 }
             },
             {
-                $limit: 5  
+                $limit: 5
             },
             {
                 $project: {
-                    organization: "$_id", 
-                    totalEvents: 1  
+                    name: 1,
+                    eventsCount: 1
                 }
             }
         ]);
-
-        if (location.length === 0) {
-            return ["location not found"]; 
-        }
-        return location;  
+        return organizations;
     } catch (error) {
-        console.error("[service] Error top organizations:", error);  
-        throw error; 
+        console.log("[service] Error fetching top organizations:", error);
+        throw error;
     }
 };
+
+
+// (part of 4) 
+const byCity = async (city: string) => {
+    try {
+        const location = await LocationModel.aggregate([
+            { $match: { city: city } },
+
+            { $unwind: "$events" },
+            {
+                $group: {
+                    _id: "$events.organization", 
+                    totalEvents: { $sum: "$events.amountEvents" } 
+                }
+            },
+            {
+                $sort: { totalEvents: -1 }
+            },
+            {
+                $limit: 5
+            },
+            {
+                $project: {
+                    organization: "$_id",
+                    totalEvents: 1
+                }
+            }
+        ]);
+        if (location.length === 0) {
+            return ["location not found"];
+        }
+        return location;
+    } catch (error) {
+        console.log("[service] Error fetching top location:", error);
+        throw error;
+    }
+};
+
 
 //(6) יקבל שם של ארגון ויחזיר אפה היה לאותו ארגון התקפות עם הכי הרבה נפגעים
 export const topLocationForOrgaization = async(organization:topOranizationDTO) => {
@@ -102,7 +121,7 @@ export const topLocationForOrgaization = async(organization:topOranizationDTO) =
         return locations}
         throw new Error("Location not found")
     } catch (error) {
-        console.error(" [service] Error top oranization location", error);
+        console.log(" [service] Error top oranization location", error);
         throw error
     }
 }

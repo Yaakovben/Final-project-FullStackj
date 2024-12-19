@@ -12,9 +12,11 @@ export const getYearsOrganization = async(req:Request<any,any,yearsOranizationDT
         res.status(400).json((err as Error).message)  
     }
 }
-export const getattackTypeByYears = async(req:Request<any,any,getByDates>,res:Response)=>{
+
+
+export const getattackTypeByYears = async(req:Request<any,any,any,getByDates>,res:Response)=>{
     try {
-        const listYears = await attackTypeByYears(req.body)
+        const listYears = await attackTypeByYears(req.query)
         res.status(200).json(listYears)
     } catch (err) {
         res.status(400).json((err as Error).message)  

@@ -70,7 +70,7 @@ export const seedAttack = async () => {
         }
         console.log(`new attack types saved successfully`);
     } catch (err) {
-        console.error('Error attack types:',  err);
+        console.log('Error attack types',err);
         throw err;
     }
 };
@@ -99,7 +99,7 @@ export const seedOrganization = async () => {
         }
         console.log(`new organization saved successfully`);
     } catch (err) {
-        console.error('Error organization:', err);
+        console.log('Error organization',err);
         throw err;
     }
 };
@@ -136,7 +136,7 @@ export const seedLocation = async () => {
             }
         }
     } catch (err) {
-        console.log("Error in seeding location:", err);
+        console.log("Error to seeding location",err);
     }
 };
 
@@ -173,10 +173,10 @@ export const seedYear = async () => {
                     orgFromDb.amount += 1;
                 }
                 await yearData.save();
-                console.log(`Year updated successfully.`);
+                console.log(`Year updated successfully`);
             }
         }
     } catch (err) {
-        console.log("Error in seeding year:", err);
+        console.log("Error to seeding year",err);
     }
 };

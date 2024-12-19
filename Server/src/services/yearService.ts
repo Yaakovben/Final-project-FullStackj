@@ -7,11 +7,37 @@ import yearsOranizationDTO from "../types/DTO/getYearsOrganizationDTO";
 
 
 
+export const attackTypeByYears = async ({firstyear,lastyear,fiveYears,tenYears}:getByDates) => {
+    const forTenYears = new Date().getFullYear() - 10;
+    const forFiveYears = new Date().getFullYear() - 5;
+    
+    try {
+        if(!firstyear && !lastyear && !fiveYears && !tenYears){
+            throw new Error("[servics] Dates undfind");
+        }
+        if(firstyear && lastyear){
+            return await YearModel.find({year:{$gte:firstyear,$lte:lastyear}})
+            .select("-listOrganization")
+            .select("-listEvents")
+        }
+        if(firstyear){
+            return await YearModel.find({year:firstyear});
+        }
+        if(fiveYears){
+            return await YearModel.find({year:{$gte:forFiveYears}});
+        }
+        if(tenYears){
+            return await YearModel.find({year:{$gte:forTenYears}});
+        }
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 //(5) אם יקבל שנה יחזיר יציג את הארגונים לפי מספר הארגונים, ואם יקבל ארגון יציג את התקריות לפי שנים
 export const YearsOrganization = async (req: yearsOranizationDTO) => {
-    try {   
+    try {
         if (typeof req.req === "number") {
             const result = await YearModel.aggregate([
                 { $match: { year: req.req } },
@@ -34,7 +60,6 @@ export const YearsOrganization = async (req: yearsOranizationDTO) => {
             ]);
 
             return result;
-            
         } else if (typeof req.req === "string") {
             const result = await YearModel.aggregate([
                 { $unwind: "$listOrganization" },

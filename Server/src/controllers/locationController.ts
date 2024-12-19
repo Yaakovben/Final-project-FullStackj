@@ -4,7 +4,7 @@ import { placesWithMostCasualties, topLocationForOrgaization, topOrganizations }
 import topOranizationDTO from "../types/DTO/getTopOrganizationDTO"
 
 //(2) אזורים עם כמות נפגעים הגבוהה ביותר, ובמקרה שישלח אזור נחזיר את כמות הנפגעים הכי גדולה 
-export const getPlacesWithMostCasualties = async(req:Request<any,any,getTopDTO>,res:Response)=>{
+export const getPlacesWithMostCasualties = async(req:Request<any,any,getTopDTO>,res:Response) => {
     try {
         const topPlace = await placesWithMostCasualties(req.body)
         res.status(200).json(topPlace)
@@ -13,7 +13,7 @@ export const getPlacesWithMostCasualties = async(req:Request<any,any,getTopDTO>,
     }
 }
 
-//(3) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
+//(4) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
 export const getTopOrganizations = async(req:Request<any,any,getTopDTO>,res:Response)=>{
     try {
         const oranization = await topOrganizations(req.body)
