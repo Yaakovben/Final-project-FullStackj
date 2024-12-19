@@ -1,6 +1,6 @@
 import TypesAttackModel from "../models/TypesAttackModel";
 
-
+//(1) סוגי תקיפות מדורגים לפי מספר נפגעים
 export const RatingTypesAttacks = async function getTypesAttackByCasualties() {
     try {
         const attacks = await TypesAttackModel.find()
@@ -8,7 +8,7 @@ export const RatingTypesAttacks = async function getTypesAttackByCasualties() {
             .select('-listEvents') 
         return attacks;
     } catch (err) {
-        console.error("[service]Error fetching types of attacks:", err);
+        console.error("[service] Error types of attacks:", err);
         throw err;   
     }
 };
