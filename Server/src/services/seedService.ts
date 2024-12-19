@@ -151,7 +151,7 @@ export const seedYear = async () => {
                     year: event.year,
                     listAmontType: [{ typeAttack: event.attacktype, ampount: 1 }],
                     listOrganization: [{ organization: event.organization, amount: 1 }],
-                    listEvents: [event._id]
+                    listEvents: [event._id] 
                 });
                 await newYear.save();
                 console.log(`Year created successfully.`);
