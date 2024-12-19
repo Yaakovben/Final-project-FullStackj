@@ -5,8 +5,9 @@ import topOranizationDTO from "../types/DTO/getTopOrganizationDTO";
 
 
 
+
 //(2) אזורים עם כמות נפגעים הגבוהה ביותר, ובמקרה שישלח אזור נחזיר את כמות הנפגעים הכי גדולה 
-export const placesWithMostCasualties = async(city:getTopDTO)=>{
+export const placesWithMostCasualties = async(city:getTopDTO) => {
     try {
         if(!city.city){
             const location =await LocationModel.find({})
@@ -30,7 +31,7 @@ export const placesWithMostCasualties = async(city:getTopDTO)=>{
 }
 
 //(3) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
-export const topOrganizations = async function (city: getTopDTO) {
+export const topOrganizations = async  (city: getTopDTO) => {
     try {
         if (!city.city) {
             const organizations = await OrganizationModel.aggregate([
@@ -90,7 +91,7 @@ export const topOrganizations = async function (city: getTopDTO) {
 };
 
 //(6) יקבל שם של ארגון ויחזיר אפה היה לאותו ארגון התקפות עם הכי הרבה נפגעים
-export const topLocationForOrgaization = async(organization:topOranizationDTO)=>{
+export const topLocationForOrgaization = async(organization:topOranizationDTO) => {
     try {
         const locations = await LocationModel.find({"events.organization": organization.organization})
         .sort({ casualties: -1 }) 

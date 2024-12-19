@@ -1,7 +1,7 @@
 import TypesAttackModel from "../models/TypesAttackModel";
 
 //(1) סוגי תקיפות מדורגים לפי מספר נפגעים
-export const RatingTypesAttacks = async function getTypesAttackByCasualties() {
+export const RatingTypesAttacks = async () => {
     try {
         const attacks = await TypesAttackModel.find()
             .sort({ casualties: -1 }) 

@@ -1,11 +1,17 @@
 
 import YearModel from "../models/YearModel";
+import getByDates from "../types/DTO/getByDatesDTO";
 import yearsOranizationDTO from "../types/DTO/getYearsOrganizationDTO";
+
+
+
+
+
 
 
 //(5) אם יקבל שנה יחזיר יציג את הארגונים לפי מספר הארגונים, ואם יקבל ארגון יציג את התקריות לפי שנים
 export const YearsOrganization = async (req: yearsOranizationDTO) => {
-    try {
+    try {   
         if (typeof req.req === "number") {
             const result = await YearModel.aggregate([
                 { $match: { year: req.req } },
@@ -28,6 +34,7 @@ export const YearsOrganization = async (req: yearsOranizationDTO) => {
             ]);
 
             return result;
+            
         } else if (typeof req.req === "string") {
             const result = await YearModel.aggregate([
                 { $unwind: "$listOrganization" },
