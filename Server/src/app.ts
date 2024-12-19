@@ -18,7 +18,7 @@ app.use(cors({
   
 connectToMongo()   
 
-// seedMain()
+
 app.listen(PORT, ()=>{ 
     console.log(`Server is runnig, visit "http://localhost:${PORT}"`);     
 })          

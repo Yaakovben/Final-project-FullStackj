@@ -14,7 +14,7 @@ const dateSchema = new Schema<IYear>({
     listEvents:{type:[Schema.Types.ObjectId], ref:"MainList"}
 }) 
 
-export default mongoose.model<IYear>("Date",dateSchema)
+export default mongoose.model<IYear>("Years",dateSchema)
 
 
 
