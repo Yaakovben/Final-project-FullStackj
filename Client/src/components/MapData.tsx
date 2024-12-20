@@ -1,9 +1,9 @@
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useState } from 'react';
-import topLocationDTO from '../types/DTO/TopLocationDTO'
+import { useEffect, useState } from 'react';
 import SelectionData from './SelectionData';
+import topLocationDTO from '../types/DTO/topLocationDTO';
 
 
 const customIcon = new L.Icon({
@@ -15,15 +15,20 @@ const customIcon = new L.Icon({
 
 
 export default function MapData() {
-  const[data,setData] = useState<topLocationDTO[]  | null>(null);
-  const[displayData,setDisplayData] = useState(false);
+  const[data,setData] = useState<topLocationDTO[] >([]);
+
+  useEffect(()=>{
+    console.log(data);
+    
+    
+  },[data])
 
  
   return (
 
     <div  className='map-data'>
 
-      <SelectionData setData={setData} setDisplayData={setDisplayData}/>
+      <SelectionData setData={setData} />
 
       <MapContainer className='map'
         style={{
@@ -46,7 +51,7 @@ export default function MapData() {
           >
           <Popup>TEST</Popup>
        </Marker>
-       {data !== null && displayData && data.map((e,index)=>  (<Marker key={index}
+       {data.length > 0 && data.map((e,index)=>  (<Marker key={index}
           icon={ customIcon }
           position={[e.lat, e.long]}
           >

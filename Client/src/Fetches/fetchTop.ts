@@ -1,9 +1,8 @@
-export  const fetchTopLocation = async()=>{
+export  const fetchTop = async(url:string)=>{
     try {
-        const res: Response = await fetch(`http://localhost:8888/api/location/top-location`, {
+        const res: Response = await fetch(url, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            // body: JSON.stringify(body)
         });
         if (!res.ok) {
           return "Can`t get top organization";
