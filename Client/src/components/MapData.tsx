@@ -1,6 +1,10 @@
 import L from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useState } from 'react';
+import topLocationDTO from '../types/DTO/TopLocationDTO'
+import SelectionData from './SelectionData';
+
 
 const customIcon = new L.Icon({
   iconUrl: "https://www.pngkit.com/png/detail/17-175946_location-vector-symbol-google-maps-marker-blue.png",
@@ -11,8 +15,16 @@ const customIcon = new L.Icon({
 
 
 export default function MapData() {
+  const[data,setData] = useState<topLocationDTO[]  | null>(null);
+  const[displayData,setDisplayData] = useState(false);
+
+ 
   return (
+
     <div  className='map-data'>
+
+      <SelectionData setData={setData} setDisplayData={setDisplayData}/>
+
       <MapContainer className='map'
         style={{
           height: '80vh',
@@ -25,7 +37,6 @@ export default function MapData() {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        //   https://a.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png
         />
         <Marker
           icon={
@@ -33,8 +44,15 @@ export default function MapData() {
           }
           position={[51.505, -0.09]}
           >
-          <Popup>HELLO</Popup>
+          <Popup>TEST</Popup>
        </Marker>
+       {data !== null && displayData && data.map((e,index)=>  (<Marker key={index}
+          icon={ customIcon }
+          position={[e.lat, e.long]}
+          >
+          <Popup>{`ארגון:${e.city}, כמות חולים:${e.casualties} אזור:${e.city}`}</Popup>
+       </Marker>)) 
+       }
       </MapContainer>
     </div>
 
