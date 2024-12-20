@@ -5,9 +5,9 @@ import topOranizationDTO from "../types/DTO/getTopOrganizationDTO";
 
 
 //(2) אזורים עם כמות נפגעים הגבוהה ביותר, ובמקרה שישלח אזור נחזיר את כמות הנפגעים הכי גדולה 
-export const placesWithMostCasualties = async(city:getTopDTO) => {
+export const placesWithMostCasualties = async(city?:string) => {
     try {
-        if(!city.city){
+        if(!city){
             const location =await LocationModel.find({})
             .sort({ casualties: -1 }) 
             .select('-listEvents')
@@ -15,7 +15,7 @@ export const placesWithMostCasualties = async(city:getTopDTO) => {
             .limit(10)
             return location
         }else{
-            const location =await LocationModel.findOne({city:city.city})
+            const location =await LocationModel.findOne({city:city})
             .sort({ casualties: -1 }) 
             .select('-listEvents') 
             .select('-events') 
@@ -60,7 +60,11 @@ const byOrganization = async () => {
             {
                 $project: {
                     name: 1,
-                    eventsCount: 1
+                    eventsCount: 1,
+                    lat: 1,  
+                    long: 1,  
+                    casualties: 1, 
+                     
                 }
             }
         ]);
@@ -72,17 +76,19 @@ const byOrganization = async () => {
 };
 
 
+
 // (part of 4) 
 const byCity = async (city: string) => {
     try {
         const location = await LocationModel.aggregate([
             { $match: { city: city } },
-
             { $unwind: "$events" },
             {
                 $group: {
                     _id: "$events.organization", 
-                    totalEvents: { $sum: "$events.amountEvents" } 
+                    totalEvents: { $sum: "$events.amountEvents" },
+                    lat: { $first: "$lat" },   
+                    long: { $first: "$long" }  
                 }
             },
             {
@@ -94,7 +100,9 @@ const byCity = async (city: string) => {
             {
                 $project: {
                     organization: "$_id",
-                    totalEvents: 1
+                    totalEvents: 1,
+                    lat: 1,  
+                    long: 1  
                 }
             }
         ]);
@@ -125,6 +133,19 @@ export const topLocationForOrgaization = async(organization:topOranizationDTO) =
         throw error
     }
 }
+
+
+
+
+export const allCities = async () => {
+    try {
+      const cities = await LocationModel.find({}).select("city");
+      return cities; 
+    } catch (err) {
+      console.error("[service] Error to get cities", err);
+      throw err;  
+    }
+  };
 
 
 
