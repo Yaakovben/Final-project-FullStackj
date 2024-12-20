@@ -4,7 +4,7 @@ import MapData from './components/MapData'
 
 export default function App() {
   return (
-    <div>
+    <div className='app'>
       <MapData/>
     </div>
   )

@@ -30,11 +30,11 @@ export default function SelectionData({setData}:Props) {
         try {
             
             if (valueOfSelection === "fetchTopLocation") 
-                {const locationData = await fetchTop(`http://localhost:8888/api/location/top-location${valueOfInputLocation !== "" ? `/${valueOfInputLocation}` : ""}`
-              );
+                {const locationData = await fetchTop(`http://localhost:8888/api/location/top-location${valueOfInputLocation !== "" ? `/${valueOfInputLocation}` : ""}`);
+                console.log(valueOfInputLocation);
               setData(locationData); 
             }else if (valueOfSelection === "fetchTopOranization") {
-                const oranization = await fetchTop("http://localhost:8888/api/location/top-organization")
+                const oranization = await fetchTop(`http://localhost:8888/api/location/top-organization${valueOfInputOrganization !== "" ? `/${valueOfInputOrganization}` : ""}`);
                 setData(oranization);   
             }
         } catch (err) {

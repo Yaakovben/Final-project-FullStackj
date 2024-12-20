@@ -32,7 +32,7 @@ export default function MapData() {
 
       <MapContainer className='map'
         style={{
-          height: '80vh',
+          height: '83vh',
           width: '100%',
         }}
         center={[51.505, -0.09]}
@@ -55,7 +55,14 @@ export default function MapData() {
           icon={ customIcon }
           position={[e.lat, e.long]}
           >
-          <Popup>{`ארגון:${e.city}, כמות חולים:${e.casualties} אזור:${e.city}`}</Popup>
+          <Popup>
+          {`${e.city ? ` אזור: ${e.city}` : ""}
+          ${e.organization ? ` אירגון: ${e.organization},` : ""} 
+          ${e.name ? ` אירגון: ${e.name},` : ""} 
+          ${e.totalEvents ? ` מספר אירועים: ${e.totalEvents},` : ""}
+          ${e.casualties ? ` מספר נפגעים: ${e.casualties}` : ""}`}
+
+          </Popup>
        </Marker>)) 
        }
       </MapContainer>

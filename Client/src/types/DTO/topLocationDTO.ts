@@ -1,6 +1,9 @@
 export default interface topLocationDTO{
     city: string
-    casualties: string,
+    casualties: number,
     lat: number
     long: number
+    organization?: string
+    totalEvents?: number
+    name?:string 
 }
