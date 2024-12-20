@@ -84,7 +84,9 @@ export const seedOrganization = async () => {
                 const newOrganization = new Organization({
                     name: event.organization,
                     casualties: event.casualties,
-                    listEvents: [event._id] 
+                    listEvents: [event._id],
+                    lat: event.lat,
+                    long: event.long 
                 });
                 await newOrganization.save(); 
                 number++; 
@@ -92,7 +94,8 @@ export const seedOrganization = async () => {
             } else {
                 await organizationModel.updateOne({
                     $push: { listEvents: event._id }, 
-                    $inc: { casualties: event.casualties } 
+                    $inc: { casualties: event.casualties } ,
+                    $set: { lat: event.lat, long: event.long }
                 });
                 console.log(`Updated  orgization`);
             }
