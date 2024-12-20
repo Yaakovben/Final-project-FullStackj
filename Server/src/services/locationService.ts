@@ -29,12 +29,12 @@ export const placesWithMostCasualties = async(city?:string) => {
 }
 
 //(4) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
-export const topOrganizations = async (city: getTopDTO)=> {
+export const topOrganizations = async (city?:string)=> {
     try {
-        if (!city.city) {
+        if (!city) {
             return await byOrganization();
         }
-        return await byCity(city.city);
+        return await byCity(city);
     } catch (error) {
         console.log("[service] Error in topOrganizations:", error);
         throw error;

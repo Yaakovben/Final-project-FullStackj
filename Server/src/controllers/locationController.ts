@@ -14,9 +14,9 @@ export const getPlacesWithMostCasualties = async(req:Request<any,any,string>,res
 }
 
 //(4) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
-export const getTopOrganizations = async(req:Request<any,any,any,getTopDTO>,res:Response)=>{
+export const getTopOrganizations = async(req:Request<any,any,string>,res:Response)=>{
     try {
-        const oranization = await topOrganizations(req.body)
+        const oranization = await topOrganizations(req.params.city)
         res.status(200).json(oranization)
     } catch (err) {
         res.status(400).json((err as Error).message)  

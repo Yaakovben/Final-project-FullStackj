@@ -7,7 +7,7 @@ const router = Router()
 router.get("/top-location/:city?",getPlacesWithMostCasualties)
 
 //(4) יחזיר את 5 המובלים בתקריות באופן כללי, ואם יקבל אזור יחזיר לפי אותו אזור
-router.get("/top-organization",getTopOrganizations)
+router.get("/top-organization/:city?",getTopOrganizations)
 
 //(6) יקבל שם של ארגון ויחזיר אפה היה לאותו ארגון התקפות עם הכי הרבה נפגעים
 router.get("/top-location-for-organization",gettopLocationForOrgaization)
