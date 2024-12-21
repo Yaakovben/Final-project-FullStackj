@@ -20,7 +20,7 @@ export const placesWithMostCasualties = async(city?:string) => {
             .select('-listEvents') 
             .select('-events') 
             .limit(10)
-            return location  
+            return [location]  
         }
     } catch (err) {
         console.log("[service] Error get top loction",err);
