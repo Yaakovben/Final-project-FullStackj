@@ -8,18 +8,25 @@ body {
     height: 100%; 
     margin: 0; 
     overflow-inline: hidden;
-  }
-
-
- .map{
-}
-
-.map-data{
-    padding: 15px;
+    direction: rtl;
     
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
   }
 
-  
+  .selection-data{
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+    padding: 15px;
+  }
+
+  .selection-input{
+    display: flex;
+    gap: 10px;
+  }
+
+  .submit-button {
+    align-self: flex-start; 
+  }
+
+ 
+

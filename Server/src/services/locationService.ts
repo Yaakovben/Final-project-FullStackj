@@ -20,7 +20,7 @@ export const placesWithMostCasualties = async(city?:string) => {
             .select('-listEvents') 
             .select('-events') 
             .limit(10)
-            return [location]  
+            return location  
         }
     } catch (err) {
         console.log("[service] Error get top loction",err);
@@ -122,9 +122,11 @@ export const topLocationForOrgaization = async(organization?:string) => {
         .select('-listEvents')
         .select('-events') 
         .limit(10)
-        if(locations.length !== 0){
-        return locations}
-        throw new Error("Location not found")
+        if(locations.length == 0){
+            return[];
+        }
+        
+        return locations
     } catch (error) {
         console.log(" [service] Error top oranization location", error);
         throw error
