@@ -10,7 +10,7 @@ router.get("/top-location/:city?",getPlacesWithMostCasualties)
 router.get("/top-organization/:city?",getTopOrganizations)
 
 //(6) יקבל שם של ארגון ויחזיר אפה היה לאותו ארגון התקפות עם הכי הרבה נפגעים
-router.get("/top-location-for-organization",gettopLocationForOrgaization)
+router.get("/top-location-for-organization/:organization?",gettopLocationForOrgaization)
 
 
 router.get("/all-cities",getAllCities)

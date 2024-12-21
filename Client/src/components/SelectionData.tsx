@@ -12,30 +12,49 @@ export interface Props{
 export default function SelectionData({setData}:Props) {
 
     const [valueOfSelection, setValueOfSelection] = useState("");
-    const[selectionIsOpen, setSelectionIsOpen] = useState(false);
     const[allCites, setAllCites] = useState<allCitiesDTO[]>([]);
     const[valueOfInputLocation, setValueOfInputLocation] = useState("");
     const[valueOfInputOrganization, setValueOfInputOrganization] = useState("");
+    const[valueOfInputLocationForOrganization, setValueOfInputLocationForOrganization] = useState("");
 
 
 
     const handleChange =async (event: SelectChangeEvent<string>) => {
       setValueOfSelection(event.target.value as string);
-      setSelectionIsOpen(true);
-    
     };
 
 
     const handelSubmit = async () => {
         try {
-            
             if (valueOfSelection === "fetchTopLocation") 
                 {const locationData = await fetchTop(`http://localhost:8888/api/location/top-location${valueOfInputLocation !== "" ? `/${valueOfInputLocation}` : ""}`);
-                console.log(valueOfInputLocation);
-              setData(locationData); 
+                if(locationData){
+                console.log(locationData);
+                setData(locationData); 
+                }else{
+                    console.log(locationData);
+                    
+                    alert("לא נמצאו אזור");
+                }
             }else if (valueOfSelection === "fetchTopOranization") {
-                const oranization = await fetchTop(`http://localhost:8888/api/location/top-organization${valueOfInputOrganization !== "" ? `/${valueOfInputOrganization}` : ""}`);
-                setData(oranization);   
+                const oranizationData = await fetchTop(`http://localhost:8888/api/location/top-organization${valueOfInputOrganization !== "" ? `/${valueOfInputOrganization}` : ""}`);
+                if(oranizationData && oranizationData.length > 0){
+                    console.log(oranizationData);
+                    setData(oranizationData);
+                }else{
+                    console.log(oranizationData);
+                    
+                    alert("לא נמצאו ארגון");
+                }     
+            }else if (valueOfSelection === "fetchTopLocationForOrganization") {
+                const topLocationData = await fetchTop(`http://localhost:8888/api/location/top-location-for-organization/${valueOfInputLocationForOrganization}`);
+                if(topLocationData ){
+                    console.log(topLocationData);
+                    setData(topLocationData);
+                }else{
+                    console.log(topLocationData);
+                    alert("לא נמצאו ארגון");
+                }
             }
         } catch (err) {
             console.log(err);
@@ -55,18 +74,29 @@ export default function SelectionData({setData}:Props) {
             <MenuItem value="" disabled>בחר אפשרות</MenuItem>
             <MenuItem value="fetchTopLocation">אזורים עם כמות נפגעים מרבית</MenuItem>
             <MenuItem value="fetchTopOranization">חמישה ארגונים בולטים ביותר</MenuItem>
+            <MenuItem value="fetchTopLocationForOrganization">אזור פגיעה מרבית לפי ארגון</MenuItem>
         </Select>
 
        
-         { valueOfSelection === "fetchTopLocation" ? <input 
-            value={valueOfInputLocation} 
-            onChange={(e) => setValueOfInputLocation(e.target.value)} 
+        {valueOfSelection === "fetchTopLocation" ? (
+            <input
+            value={valueOfInputLocation}
+            onChange={(e) => setValueOfInputLocation(e.target.value)}
             placeholder="חפש לפי עיר"
-            />: valueOfSelection === "fetchTopOranization" && <input 
-            value={valueOfInputOrganization} 
-            onChange={(e) => setValueOfInputOrganization(e.target.value)} 
-            placeholder="חפש לפי ארגון"
-        />}
+            />
+            ) : valueOfSelection === "fetchTopOranization" ? (
+            <input
+            value={valueOfInputOrganization}
+            onChange={(e) => setValueOfInputOrganization(e.target.value)}
+            placeholder="חפש לפי עיר פעילות"
+            />
+            ) : valueOfSelection === "fetchTopLocationForOrganization" ? (
+            <input
+            value={valueOfInputLocationForOrganization}
+            onChange={(e) => setValueOfInputLocationForOrganization(e.target.value)}
+            placeholder="חפש לפי עיר ארגון"
+            />
+            ) : null}
         <Button
         variant="contained"
         onClick={handelSubmit}

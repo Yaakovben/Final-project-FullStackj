@@ -24,9 +24,9 @@ export const getTopOrganizations = async(req:Request<any,any,string>,res:Respons
 }
 
 //(6) יקבל שם של ארגון ויחזיר אפה היה לאותו ארגון התקפות עם הכי הרבה נפגעים
-export const gettopLocationForOrgaization= async(req:Request<any,any,topOranizationDTO>,res:Response)=>{
+export const gettopLocationForOrgaization= async(req:Request<any,any,string>,res:Response)=>{
     try {
-        const location = await topLocationForOrgaization(req.body)
+        const location = await topLocationForOrgaization(req.params.organization)
         res.status(200).json(location)
     } catch (err) {
         res.status(400).json((err as Error).message)  

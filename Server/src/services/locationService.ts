@@ -20,7 +20,7 @@ export const placesWithMostCasualties = async(city?:string) => {
             .select('-listEvents') 
             .select('-events') 
             .limit(10)
-            return location  
+            return [location]  
         }
     } catch (err) {
         console.log("[service] Error get top loction",err);
@@ -106,9 +106,6 @@ const byCity = async (city: string) => {
                 }
             }
         ]);
-        if (location.length === 0) {
-            return ["location not found"];
-        }
         return location;
     } catch (error) {
         console.log("[service] Error fetching top location:", error);
@@ -118,9 +115,9 @@ const byCity = async (city: string) => {
 
 
 //(6) יקבל שם של ארגון ויחזיר אפה היה לאותו ארגון התקפות עם הכי הרבה נפגעים
-export const topLocationForOrgaization = async(organization:topOranizationDTO) => {
+export const topLocationForOrgaization = async(organization?:string) => {
     try {
-        const locations = await LocationModel.find({"events.organization": organization.organization})
+        const locations = await LocationModel.find({"events.organization": organization})
         .sort({ casualties: -1 }) 
         .select('-listEvents')
         .select('-events') 

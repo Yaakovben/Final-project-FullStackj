@@ -15,19 +15,15 @@ const customIcon = new L.Icon({
 
 
 export default function MapData() {
-  const[data,setData] = useState<topLocationDTO[] >([]);
 
+  const[data,setData] = useState<topLocationDTO[] >([]);
   useEffect(()=>{
     console.log(data);
-    
-    
   },[data])
 
  
   return (
-
     <div  className='map-data'>
-
       <SelectionData setData={setData} />
 
       <MapContainer className='map'
@@ -36,13 +32,14 @@ export default function MapData() {
           width: '100%',
         }}
         center={[51.505, -0.09]}
-        zoom={13}
+        zoom={2}
         scrollWheelZoom={false}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
         <Marker
           icon={
             customIcon
@@ -51,6 +48,7 @@ export default function MapData() {
           >
           <Popup>TEST</Popup>
        </Marker>
+
        {data.length > 0 && data.map((e,index)=>  (<Marker key={index}
           icon={ customIcon }
           position={[e.lat, e.long]}
@@ -61,7 +59,6 @@ export default function MapData() {
           ${e.name ? ` אירגון: ${e.name},` : ""} 
           ${e.totalEvents ? ` מספר אירועים: ${e.totalEvents},` : ""}
           ${e.casualties ? ` מספר נפגעים: ${e.casualties}` : ""}`}
-
           </Popup>
        </Marker>)) 
        }
