@@ -88,5 +88,15 @@ body {
   
  }
 
+.listItem:hover {
+  background-color: #2196f3; 
+  color: white;  
+}
+.listItem:active {
+  transform: scale(0.98); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transform: scale(1.2)
+}
+
 
 

@@ -41,14 +41,14 @@ export default function NavBar() {
                 onClose={toggleDrawer(false)}
             >
                 <List>
-                    <ListItem >
-                        <ListItemText primary="מפה נתונים"  onClick={()=>handle("/map")}/>
+                    <ListItem className="listItem" >
+                        <ListItemText primary="מפה נתונים" onClick={()=>handle("/map")}/>
                     </ListItem>
-                    <ListItem>
+                    <ListItem className="listItem" >
                         <ListItemText primary="גרף סוגי התקפות" onClick={()=>handle("/Graph-typesattack")}/>
                     </ListItem>
-                    <ListItem>
-                        <ListItemText primary="גרף אירועים לפי שנים" onClick={()=>handle("/Graph-events-years")} />
+                    <ListItem  className="listItem">
+                        <ListItemText primary="גרף אירועים לפי שנים"onClick={()=>handle("/Graph-events-years")} />
                     </ListItem>
                 </List>
             </Drawer>
