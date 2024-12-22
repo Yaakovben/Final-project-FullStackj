@@ -4,6 +4,7 @@ import { fetchTop } from '../../Fetches/fetchTop';
 import { Bar, Line } from 'react-chartjs-2';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import Chart from  'chart.js/auto'
+
 Chart.register(
     CategoryScale,
     LinearScale,
@@ -13,6 +14,7 @@ Chart.register(
     Tooltip,
     Legend
   );
+  
 export default function GtaphTypesAttack() {
     const [data, setData] = useState<typesAttackDTO[] >([]);
 
