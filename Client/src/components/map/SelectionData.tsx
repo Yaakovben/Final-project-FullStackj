@@ -34,11 +34,9 @@ export default function SelectionData({ setData }: Props) {
         if (locationData && locationData[0] !== null) {
           console.log(locationData);
           console.log(valueOfInputLocation);
-          
           setData(locationData);
         } else {
           console.log(locationData);
-
           alert("לא נמצא אזור");
         }
       } else if (valueOfSelection === "fetchTopOranization") {
