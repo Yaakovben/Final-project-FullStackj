@@ -15,7 +15,7 @@ Chart.register(
     Legend
   );
   
-export default function GtaphTypesAttack() {
+export default function GraphTypesAttack() {
     const [data, setData] = useState<typesAttackDTO[] >([]);
 
     useEffect(() => {
