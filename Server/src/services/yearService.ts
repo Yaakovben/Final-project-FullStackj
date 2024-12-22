@@ -21,13 +21,19 @@ export const attackTypeByYears = async ({firstyear,lastyear,fiveYears,tenYears}:
             .select("-listEvents")
         }
         if(firstyear){
-            return await YearModel.find({year:firstyear});
+            return await YearModel.find({year:firstyear})
+            .select("-listOrganization")
+            .select("-listEvents");
         }
         if(fiveYears){
-            return await YearModel.find({year:{$gte:forFiveYears}});
+            return await YearModel.find({year:{$gte:forFiveYears}})
+            .select("-listOrganization")
+            .select("-listEvents");
         }
         if(tenYears){
-            return await YearModel.find({year:{$gte:forTenYears}});
+            return await YearModel.find({year:{$gte:forTenYears}})
+            .select("-listOrganization")
+            .select("-listEvents");
         }
     } catch (error) {
         throw error;

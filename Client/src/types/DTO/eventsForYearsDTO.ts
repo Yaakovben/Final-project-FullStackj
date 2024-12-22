@@ -1,8 +1,8 @@
 export interface eventsForYearsDTO{
-    listAmontType: [
-        {
-            typeAttack: string,
-            ampount: 152  
-        }
-    ]
+    year:number,
+    listAmontType:[{
+        typeAttack:string,
+        ampount:number
+    }]
+    
 }

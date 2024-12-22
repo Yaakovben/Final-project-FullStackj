@@ -1,36 +1,113 @@
 import React, { useEffect, useState } from 'react'
 import { eventsForYearsDTO } from '../../types/DTO/eventsForYearsDTO';
 import { fetchTop } from '../../Fetches/fetchTop';
+import { Bar, Line, Pie } from 'react-chartjs-2';
+import Chart, { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js/auto';
+import { Button, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+Chart.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
+
 
 export default function GraphEventsYears() {
-    const[typeRequest,setTypeRequest] = useState("?firstyear=1990");
+    const[typeRequest,setTypeRequest] = useState<string|undefined>("?tenYears=10");
     const[data,setData] = useState<eventsForYearsDTO[]>([]);
+    const[openInput,setOpenInput] = useState(false);
+    const[fromDate,setFromDate] = useState("")
+    const[endDate,setEndDate] = useState("")
 
+    
     useEffect(()=>{
-
         const fetchData = async()=>{
             try {
-                const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest}`);
-                setData(response);
-                console.log(response);
+                if (typeRequest || (fromDate && endDate)) {
+                    const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest != undefined ?  typeRequest:`?fromDate=${fromDate}&endDate=${endDate}` }`);
+                    if( response== "Can`t get top organization" || response == undefined){
+                        alert("שגיאה בשליחת נתונים");
+                    }else{
+                        console.log(response)    
+                        setData(response);
+                }
+
+                }
             } catch (err) {
                 console.log(err);   
             }
         }
         fetchData(); 
-    },[typeRequest])
+    },[typeRequest,fromDate,endDate,openInput])
+
+    const handelSelect = (event: SelectChangeEvent<string>)=>{
+       if(event.target.value != "ManualSelection"){
+           setTypeRequest(event.target.value); 
+           setOpenInput(false);
+        }else{
+            setOpenInput(true);
+        }
+    }
+
+    const handelSubmit = async () => {
+        if (parseInt(fromDate) > parseInt(endDate)) {
+            alert("שנת התחלה לא יכולה להיות מאוחרת משנת סיום");
+            return;
+        }
+        setTypeRequest(`?firstyear=${fromDate}&lastyear=${endDate}`);
+        setOpenInput(false);
+    }
+
+    const labels = data.map((t) => t.year);
+    const graphYears = {
+    labels: labels,
+    datasets: [
+    {
+    label: "דירוג סוג התקפה לפי נפגעים",
+    backgroundColor:["rgb(60, 202, 140)","orange","grey","rgba(167, 203, 25, 0.97)"],
+    borderColor: "rgb(24, 35, 30)",
+    data: data.map((a) => a.listAmontType.length),
+    },
+    ],
+};
+
 
   return (
 
 
-    <div>
-
-
-
-
-        <h1>bhibphl</h1>
-        <button onClick={()=>{setTypeRequest("?tenYears=10")}}>10 Years</button>
-        <button onClick={()=>{setTypeRequest("?fiveYears=5")}}>5 Years</button>
+    <div className="graph-events-years">
+        <h1>כמות תקריות יחודיות לפי טווח שנים מבוקש</h1>
+        <Select
+        value={typeRequest}
+        onChange={handelSelect}
+        >
+         <MenuItem value="" disabled>בחר טווח שנים</MenuItem>
+         <MenuItem value="?tenYears=10">10 שנים אחרונות</MenuItem>
+         <MenuItem value="?fiveYears=5">5 שנים אחרונות</MenuItem>
+         <MenuItem value="ManualSelection">בחירת טווח שנים</MenuItem>
+        </Select>
+        {openInput && <div className="input-years">
+            <h2>בחר שנת התחלה</h2>
+            <p className='closeWindow' onClick={() => setOpenInput(false)}>❌</p>
+            <TextField
+            type='number'
+            value={fromDate}
+            onChange={(e) => setFromDate(e.target.value as string)}
+            >     
+            </TextField>
+            <h2>בחר שנת סיום</h2>
+            <TextField
+            type='number'
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value as string)}
+            >     
+            </TextField>
+            <Button
+            type="submit"
+            variant="contained"
+            onClick={handelSubmit}
+            sx={{ mt: 3, mb: 2 }}
+            disabled={fromDate == "" }
+            >בחר
+            </Button>
+        </div> }
+      
+        <Bar data={graphYears} className='the-graph-events-years' />
     </div>
   )
 }

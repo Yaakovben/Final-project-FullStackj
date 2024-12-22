@@ -1,7 +1,7 @@
 import React from "react";
 import MapData from "./components/map/MapData";
 import { Navigate, Route, Routes } from "react-router-dom";
-import GtaphTypesAttack from "./components/graph/GtaphTypesAttack";
+import GtaphTypesAttack from "./components/graph/GraphTypesAttack";
 import GraphEventsYears from "./components/graph/GraphEventsYears";
 
 

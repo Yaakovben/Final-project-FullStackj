@@ -29,7 +29,7 @@ body {
   }
 
   
-  .graph-types{
+  .graph-types {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -41,5 +41,52 @@ body {
 
   }
 
- 
+  .graph-events-years{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+    width: 100vw;
+    padding-right: 15px;
+    gap: 10px;
+  }
+
+
+
+
+ .input-years{
+  position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(189, 226, 228, 0.879);
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+   
+ }
+
+ .closeWindow{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+ }
+
+ .closeWindow:hover{
+  background-color: rgb(228, 222, 210);
+  padding: 2px;
+  border-radius: 8px;
+ }
+
+ .the-graph-events-years{
+  background-color: rgba(203, 203, 195, 0.293);
+  padding: 40px;
+  
+ }
+
+
 
