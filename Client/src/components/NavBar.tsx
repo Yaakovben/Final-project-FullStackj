@@ -50,6 +50,9 @@ export default function NavBar() {
                     <ListItem  className="listItem">
                         <ListItemText primary="גרף אירועים לפי שנים"onClick={()=>handle("/Graph-events-years")} />
                     </ListItem>
+                    <ListItem  className="listItem">
+                        <ListItemText primary="גרף 5 אירגונים משמועתיים "onClick={()=>handle("/Graph-five-top-oraganization")} />
+                    </ListItem>
                 </List>
             </Drawer>
         </>

@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import GtaphTypesAttack from "./components/graph/GraphTypesAttack";
 import GraphEventsYears from "./components/graph/GraphEventsYears";
 import NavBar from "./components/NavBar";
+import GraphFiveTopOrganization from "./components/graph/GraphFiveTopOrganization";
 
 
 export default function App() {
@@ -14,7 +15,8 @@ export default function App() {
         <Route path="map" element={<MapData />} />
         <Route path="Graph-typesattack" element={<GtaphTypesAttack/>}/>
         <Route path="Graph-events-years" element={<GraphEventsYears/>}/>
-        <Route path="/" element={<Navigate to={"/Graph-events-years"}/>} />
+        <Route path="Graph-five-top-oraganization" element={<GraphFiveTopOrganization/>}/>
+        <Route path="/" element={<Navigate to={"/map"}/>} />
       </Routes >
     </div>
   );

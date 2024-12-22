@@ -26,8 +26,9 @@ export default function MapData() {
       <MapContainer
         className="map"
         style={{
-          height: "83vh",
+          height: "78vh",
           width: "100%",
+          padding: "15px",
         }}
         center={[31.7683, 35.2137]}
         zoom={5}
