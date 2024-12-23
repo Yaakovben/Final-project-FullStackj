@@ -3,7 +3,6 @@ import {AppBar,Toolbar,IconButton,Typography,Drawer,List,ListItem,ListItemText,}
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
 
-
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();

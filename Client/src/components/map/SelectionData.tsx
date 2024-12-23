@@ -1,14 +1,7 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { fetchTop } from "../../Fetches/fetchTop";
-import {
-  Button,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
+import {Button,MenuItem,Select,SelectChangeEvent,TextField,} from "@mui/material";
 import allCitiesDTO from "../../types/DTO/allCitiesDTO";
-import { fetchallCities } from "../../Fetches/fetchAllCities";
 
 export interface Props {
   setData: (data: any) => void;
@@ -45,11 +38,9 @@ export default function SelectionData({ setData }: Props) {
         );
         if (oranizationData && oranizationData.length > 0) {
           console.log(oranizationData);
-
           setData(oranizationData);
         } else {
           console.log(oranizationData);
-
           alert("לא נמצא אזור");
         }
       } else if (valueOfSelection === "fetchTopLocationForOrganization") {
