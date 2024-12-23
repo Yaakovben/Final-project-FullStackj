@@ -4,9 +4,9 @@ import yearsOranizationDTO from "../types/DTO/getYearsOrganizationDTO"
 import getByDates from "../types/DTO/getByDatesDTO"
 
 //(5) אם יקבל שנה יחזיר יציג את הארגונים לפי מספר הארגונים, ואם יקבל ארגון יציג את התקריות לפי שנים
-export const getYearsOrganization = async(req:Request<any,any,yearsOranizationDTO>,res:Response)=>{
+export const getYearsOrganization = async(req:Request<any,any,string>,res:Response)=>{
     try {
-        const yearsOranization = await YearsOrganization(req.body)
+        const yearsOranization = await YearsOrganization(req.params.req)
         res.status(200).json(yearsOranization)
     } catch (err) {
         res.status(400).json((err as Error).message)  

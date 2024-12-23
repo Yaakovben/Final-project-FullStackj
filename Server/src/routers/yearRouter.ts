@@ -7,7 +7,7 @@ import { getattackTypeByYears, getYearsOrganization } from "../controllers/yearC
  router.get("/attack-by-dates",getattackTypeByYears)
 
  //(5) אם יקבל שנה יחזיר יציג את הארגונים לפי מספר הארגונים, ואם יקבל ארגון יציג את התקריות לפי שנים
- router.get("/year-oranization",getYearsOrganization)
+ router.get("/year-organization/:req?",getYearsOrganization)
 
 
  export default router

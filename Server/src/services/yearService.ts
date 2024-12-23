@@ -42,12 +42,18 @@ export const attackTypeByYears = async ({firstyear,lastyear,fiveYears,tenYears}:
 
 
 //(5) אם יקבל שנה יחזיר יציג את הארגונים לפי מספר הארגונים, ואם יקבל ארגון יציג את התקריות לפי שנים
-export const YearsOrganization = async (req: yearsOranizationDTO) => {
+export const YearsOrganization = async (req:string) => {
     try {
-        if (typeof req.req === "number") {
-            return await byYear(req.req);
-        } else if (typeof req.req === "string") {
-            return await byOranization(req.req);
+        console.log(".lolk");
+        
+        const type = parseInt(req);
+        if (!isNaN(type)) {
+            console.log(parseInt(req));
+            return await byYear(type);
+        } else if (isNaN(type)) {
+            console.log(parseInt(req));
+            return await byOranization(req);
+            
         } else {
             throw new Error("The field must be a number or year !!!");
         }

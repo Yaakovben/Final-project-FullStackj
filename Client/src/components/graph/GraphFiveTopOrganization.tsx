@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import topOrganizationDTO from '../../types/DTO/topOrganization';
 import { fetchTop } from '../../Fetches/fetchTop';
 import { Pie } from 'react-chartjs-2';
@@ -18,8 +18,11 @@ export default function GraphFiveTopOrganization() {
     const fetchData = async () => {
         try {
             const response = await fetchTop(
-                `http://localhost:8888/api/location/top-organization/${city}`
-            );
+                `http://localhost:8888/api/location/top-organization/${city}`);
+            if(response.length == 0){ 
+                alert("לא נמצאו נתונים");
+                return
+            }
             setData(response);
             console.log(response);
             
@@ -45,6 +48,7 @@ export default function GraphFiveTopOrganization() {
     const handleSubmit = async () => {
         setCity(valueInput);
         setOpenInput(false);
+        setValueSelect("");
     }
 
    

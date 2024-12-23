@@ -124,5 +124,28 @@ body {
   border-radius: 10px;
 }
 
+.graph-OrgainzationByYears{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-cityOrOrganization{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.graph-OrgainzationByYears{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 67vh;
+  width: 100vw;
+  gap: 10px;
+}
+
 
 

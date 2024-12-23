@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {AppBar,Toolbar,IconButton,Typography,Drawer,List,ListItem,ListItemText,} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -52,6 +52,9 @@ export default function NavBar() {
                     </ListItem>
                     <ListItem  className="listItem">
                         <ListItemText primary="גרף 5 אירגונים משמועתיים "onClick={()=>handle("/Graph-five-top-oraganization")} />
+                    </ListItem>
+                    <ListItem  className="listItem">
+                        <ListItemText primary="גרף נתוני ארגונים לפי שנים"onClick={()=>handle("/Graph-organization-by-years")} />
                     </ListItem>
                 </List>
             </Drawer>

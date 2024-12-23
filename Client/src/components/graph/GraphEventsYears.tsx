@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { eventsForYearsDTO } from '../../types/DTO/eventsForYearsDTO';
 import { fetchTop } from '../../Fetches/fetchTop';
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Bar} from 'react-chartjs-2';
 import Chart, { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js/auto';
 import { Button, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 Chart.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);

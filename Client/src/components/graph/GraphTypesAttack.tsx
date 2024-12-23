@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import typesAttackDTO from '../../types/DTO/typesAttackDTO';
 import { fetchTop } from '../../Fetches/fetchTop';
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import Chart from  'chart.js/auto'
 
