@@ -82,13 +82,16 @@ export default function GraphFiveTopOrganization() {
             {openInput && <div className="input-city"> 
             <h4 className='closeWindow' onClick={() => setOpenInput(false)}>❌</h4>
             <h3>בחירה לפי אזור</h3>
-            <TextField placeholder="בחר אזור" value={valueInput} onChange={(event) => setValueInput(event.target.value)}
+            <TextField placeholder="בחר אזור" value={valueInput} 
+            onChange={(event) => setValueInput(event.target.value)}
+            style={{backgroundColor:"rgba(235, 214, 161, 0.94)"}}
              />
               <Button
                 type="submit"
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
+                style={{ backgroundColor: "#7f6d41" }}
                 disabled={valueInput == "" }
                 >בחר
             </Button>

@@ -109,9 +109,10 @@ export default function SelectionData({ setData }: Props) {
       </div>
       <Button
         className="submit-button"
+        type="submit"
         variant="contained"
         onClick={handelSubmit}
-        style={{ marginTop: 20,color:"white", backgroundColor:"green", width: 120, height: 40 }}
+        style={{ marginTop: 20, backgroundColor:"#7f6d41", width: 120, height: 40 }}
       >
         שליחה
       </Button>

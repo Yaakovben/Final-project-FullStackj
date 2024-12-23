@@ -1,7 +1,8 @@
 import { useState } from "react";
-import {AppBar,Toolbar,IconButton,Typography,Drawer,List,ListItem,ListItemText,} from "@mui/material";
+import {AppBar,Toolbar,IconButton,Typography,Drawer,List,ListItem,ListItemText, Avatar, Container,} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
+
 
 export default function NavBar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,9 @@ export default function NavBar() {
 
     return (
         <>
+       
             <AppBar position="static">
+            <Container maxWidth="xl" sx={{ backgroundColor: "#7f6d41" }}>
                 <Toolbar variant="dense">
                     <IconButton
                         edge="start"
@@ -29,10 +32,23 @@ export default function NavBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant="h6" color="inherit" component="div">
-                        Photos
+                   
+                    <Typography variant="h5" color="#white" sx={{
+                            flexGrow: 1,
+                            textAlign: "center",
+                             fontWeight: "bold"
+                            
+                        }}>
+                    INTEL INFORMATION
                     </Typography>
+                   
+                    <IconButton  sx={{
+                                        marginLeft: "auto",
+                                    }}>
+                                <Avatar alt="Remy Sharp" src="https://www.idf.il/media/ysmdfak3/badge_of_the_israeli_defense_forces_2022_version.svg" />
+                    </IconButton>
                 </Toolbar>
+                </Container>
             </AppBar>
             <Drawer
                 anchor="left"
@@ -41,7 +57,7 @@ export default function NavBar() {
             >
                 <List>
                     <ListItem className="listItem" >
-                        <ListItemText primary="מפה נתונים" onClick={()=>handle("/map")}/>
+                        <ListItemText primary="מפה נתונים" onClick={()=>handle("/map-data")}/>
                     </ListItem>
                     <ListItem className="listItem" >
                         <ListItemText primary="גרף סוגי התקפות" onClick={()=>handle("/Graph-typesattack")}/>
@@ -54,6 +70,9 @@ export default function NavBar() {
                     </ListItem>
                     <ListItem  className="listItem">
                         <ListItemText primary="גרף נתוני ארגונים לפי שנים"onClick={()=>handle("/Graph-organization-by-years")} />
+                    </ListItem>
+                    <ListItem  className="listItem">
+                        <ListItemText primary="מפת עדכון"onClick={()=>handle("/Updates-map")} />
                     </ListItem>
                 </List>
             </Drawer>

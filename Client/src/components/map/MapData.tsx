@@ -7,8 +7,8 @@ import topLocationDTO from "../../types/DTO/topLocationDTO";
 import SelectionData from "./SelectionData";
 
 const customIcon = new L.Icon({
-  iconUrl: "https://www.pngkit.com/png/detail/17-175946_location-vector-symbol-google-maps-marker-blue.png",
-  iconSize: [25, 41],
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+  iconSize: [30, 50],
   iconAnchor: [15, 45],
   popupAnchor: [0, -45],
 });
@@ -26,7 +26,7 @@ export default function MapData() {
       <MapContainer
         className="map"
         style={{
-          height: "78vh",
+          height: "77vh",
           width: "100%",
           padding: "15px",
         }}

@@ -62,7 +62,7 @@ export default function GraphEventsYears() {
     datasets: [
     {
     label: "דירוג תקריות יחודיות לפי טווח שנים",
-    backgroundColor:["rgba(60, 202, 140, 0.31)","rgba(221, 17, 48, 0.31)","rgba(132, 200, 219, 0.31)","rgba(167, 203, 25, 0.97)","rgba(130, 124, 188, 0.97)"],
+    backgroundColor: "rgba(86, 202, 60, 0.82)",
     borderColor: "rgb(24, 35, 30)",
     data: data.map((a) => a.listAmontType.length),
     },
@@ -87,18 +87,20 @@ export default function GraphEventsYears() {
          <MenuItem value="ManualSelection">בחירת טווח שנים</MenuItem>
         </Select>
         {openInput && <div className="input-years">
-            <h2>בחר שנת התחלה</h2>
+            <h2>: בחר שנת התחלה</h2>
             <p className='closeWindow' onClick={() => setOpenInput(false)}>❌</p>
             <TextField
             type='number'
             value={fromDate}
+            style={{backgroundColor:"rgba(235, 214, 161, 0.94)"}}
             onChange={(e) => setFromDate(e.target.value as string)}
             >     
             </TextField>
-            <h2>בחר שנת סיום</h2>
+            <h2>: בחר שנת סיום</h2>
             <TextField
             type='number'
             value={endDate}
+            style={{backgroundColor:"rgba(235, 214, 161, 0.94)"}}
             onChange={(e) => setEndDate(e.target.value as string)}
             >     
             </TextField>
@@ -107,6 +109,7 @@ export default function GraphEventsYears() {
             variant="contained"
             onClick={handleSubmit}
             sx={{ mt: 3, mb: 2 }}
+            style={{ backgroundColor:" #7f6d41" }}
             disabled={fromDate == "" }
             >בחר
             </Button>

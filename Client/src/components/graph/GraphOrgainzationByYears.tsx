@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import { useEffect, useState } from 'react'
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line, Pie } from 'react-chartjs-2';
 import { fetchTop } from '../../Fetches/fetchTop';
 import orgnizationByYearsDTO from '../../types/DTO/orgnizationByYearsDTO';
 import { Button, TextField } from '@mui/material';
@@ -46,18 +46,19 @@ export default function GraphOrgainzationByYears() {
   return (
     <div className='graph-OrgainzationByYears'>
         <h1>גרף ארגונים לפי שנים</h1>
-        <div className='input-cityOrOrganization'>
-        <TextField value={valyeInput} onChange={(e) => setValueInput(e.target.value)} placeholder='חפש לפי אזור או ארגון'/>
+        <div className='input-graph-years'>
+        <TextField value={valyeInput} onChange={(e) => setValueInput(e.target.value)} placeholder='חפש לפי שנה או ארגון'/>
         <Button
                 type="submit"
                 variant="contained"
                 onClick={()=>{setTypeRequest(valyeInput);}}
                 sx={{ mt: 3, mb: 2 }}
+                style={{ backgroundColor: "#7f6d41" }}
                 disabled={valyeInput === ""}
                 >בחר
             </Button>
             </div>
-        <Bar data={organizationData} className='top-organization' />
+        <Line data={organizationData} className='top-organization' />
     </div>
   )
 }
