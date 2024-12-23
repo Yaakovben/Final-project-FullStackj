@@ -50,6 +50,7 @@ export default function GraphEventsYears() {
         }
         if(fromDate.length != 4 ){
             alert("שנה לא תקינה");
+            return;
         }
         setTypeRequest(`?firstyear=${fromDate}&lastyear=${endDate}`);
         setOpenInput(false);
@@ -60,7 +61,7 @@ export default function GraphEventsYears() {
     labels: labels,
     datasets: [
     {
-    label: "דירוג סוג התקפה לפי נפגעים",
+    label: "דירוג תקריות יחודיות לפי טווח שנים",
     backgroundColor:["rgba(60, 202, 140, 0.31)","rgba(221, 17, 48, 0.31)","rgba(132, 200, 219, 0.31)","rgba(167, 203, 25, 0.97)","rgba(130, 124, 188, 0.97)"],
     borderColor: "rgb(24, 35, 30)",
     data: data.map((a) => a.listAmontType.length),

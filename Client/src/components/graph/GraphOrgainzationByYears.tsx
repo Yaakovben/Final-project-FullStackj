@@ -1,19 +1,16 @@
 import Chart from 'chart.js/auto';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
-import React, { useEffect, useState } from 'react'
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import { useEffect, useState } from 'react'
+import { Bar } from 'react-chartjs-2';
 import { fetchTop } from '../../Fetches/fetchTop';
 import orgnizationByYearsDTO from '../../types/DTO/orgnizationByYearsDTO';
-import { Button, Select, TextField } from '@mui/material';
-
-
-
+import { Button, TextField } from '@mui/material';
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
 export default function GraphOrgainzationByYears() {
     const[data,setData] = useState<orgnizationByYearsDTO[]>([]);
     const[typeRequest,setTypeRequest] = useState<string>("Unknown");
     const[valyeInput,setValueInput] = useState<string>("");
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,10 +22,7 @@ export default function GraphOrgainzationByYears() {
             }
         }
         fetchData();
-
     },[typeRequest]);
-
-
 
     const organizationData = {
         labels: data.map((item) => item.totalEvents?item.organization:item.year),
@@ -49,11 +43,7 @@ export default function GraphOrgainzationByYears() {
         ],
     };
 
-
-    
   return (
-
-
     <div className='graph-OrgainzationByYears'>
         <h1>גרף ארגונים לפי שנים</h1>
         <div className='input-cityOrOrganization'>

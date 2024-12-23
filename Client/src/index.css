@@ -8,20 +8,20 @@ body {
     height: 100%; 
     margin: 0; 
     overflow-inline: hidden;
-    direction: ltr;
-    
-
-  }
-  .map{
-    padding: 15px;
   }
   
-
+  .map-data{
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
   .selection-data{
     display: flex;
     justify-content: space-between;
     width: 100%; 
-    padding: 15px;
+    padding: 10px;
+    direction: rtl;
   }
 
   .selection-input{
@@ -43,8 +43,23 @@ body {
     width: 100vw;
     padding: 15px;
     gap: 10px;
-
   }
+
+  .leaflet-popup-content{
+    display: flex ;
+    flex-direction: column ;
+    align-items: center ;
+    background-color: rgba(165, 233, 233, 0.681);
+    justify-content: center;
+    border-radius: 8px;  
+  }
+
+  .popup-map{
+    padding: 2px;
+    border-radius: 8px;
+  }
+
+ 
 
   .graph-events-years{
     position: absolute;

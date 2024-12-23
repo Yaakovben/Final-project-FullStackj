@@ -45,13 +45,17 @@ export default function MapData() {
 
         {data.length > 0 &&
           data.map((e, index) => (
-            <Marker key={index} icon={customIcon} position={[e.lat, e.long]}>
-              <Popup>
-                {`${e.city ? ` אזור: ${e.city}` : ""}
-          ${e.organization ? ` אירגון: ${e.organization},` : ""} 
-          ${e.name ? ` אירגון: ${e.name},` : ""} 
-          ${e.totalEvents ? ` מספר אירועים: ${e.totalEvents},` : ""}
-          ${e.casualties ? ` מספר נפגעים: ${e.casualties}` : ""}`}
+            <Marker key={index} icon={customIcon} position={[e.lat, e.long]} >
+              <Popup >
+              <div className="popup-map">
+              {e.city && <p> {e.city} <strong>:עיר </strong></p>}
+              {e.organization && <p><strong>אירגון:</strong> {e.organization}</p>}
+              {e.name && <p> {e.name}<strong>:שם </strong></p>}
+              {e.totalEvents && <p><strong>מספר אירועים: </strong> {e.totalEvents}</p>}
+              {e.casualties && <p><strong>מספר נפגעים: </strong> {e.casualties}</p>}
+              {e.lat && <p><strong> נ.צ אופקי: </strong> {e.lat}</p>}
+              {e.long && <p><strong> נ.צ רוחבי: </strong> {e.long}</p>}
+              </div>
               </Popup>
             </Marker>
           ))}
