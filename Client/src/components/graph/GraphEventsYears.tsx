@@ -14,28 +14,27 @@ export default function GraphEventsYears() {
     const[fromDate,setFromDate] = useState("")
     const[endDate,setEndDate] = useState("")
 
-    
-    useEffect(()=>{
-        const fetchData = async()=>{
-            try {
-                if (typeRequest || (fromDate && endDate)) {
-                    const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest != undefined ?  typeRequest:`?fromDate=${fromDate}&endDate=${endDate}` }`);
-                    if( response== "Can`t get top organization" || response == undefined){
-                        alert("שגיאה בשליחת נתונים");
-                    }else{
-                        console.log(response)    
-                        setData(response);
-                }
 
+    const fetchData = async()=>{
+        try {
+            if (typeRequest || (fromDate && endDate)) {
+                const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest != undefined ?  typeRequest:`?fromDate=${fromDate}&endDate=${endDate}` }`);
+                if( response== "Can`t get top organization" || response == undefined){
+                    alert("שגיאה בשליחת נתונים");
+                }else{
+                    console.log(response)    
+                    setData(response);
                 }
-            } catch (err) {
-                console.log(err);   
             }
+        } catch (err) {
+            console.log(err);   
         }
+    }
+    useEffect(()=>{
         fetchData(); 
-    },[typeRequest,fromDate,endDate,openInput])
+    },[typeRequest])
 
-    const handelSelect = (event: SelectChangeEvent<string>)=>{
+    const handleSelect = (event: SelectChangeEvent<string>)=>{
        if(event.target.value != "ManualSelection"){
            setTypeRequest(event.target.value); 
            setOpenInput(false);
@@ -44,10 +43,13 @@ export default function GraphEventsYears() {
         }
     }
 
-    const handelSubmit = async () => {
+    const handleSubmit = async () => {
         if (parseInt(fromDate) > parseInt(endDate)) {
             alert("שנת התחלה לא יכולה להיות מאוחרת משנת סיום");
             return;
+        }
+        if(fromDate.length != 4 ){
+            alert("שנה לא תקינה");
         }
         setTypeRequest(`?firstyear=${fromDate}&lastyear=${endDate}`);
         setOpenInput(false);
@@ -59,7 +61,7 @@ export default function GraphEventsYears() {
     datasets: [
     {
     label: "דירוג סוג התקפה לפי נפגעים",
-    backgroundColor:["rgb(60, 202, 140)","orange","grey","rgba(167, 203, 25, 0.97)"],
+    backgroundColor:["rgba(60, 202, 140, 0.31)","rgba(221, 17, 48, 0.31)","rgba(132, 200, 219, 0.31)","rgba(167, 203, 25, 0.97)","rgba(130, 124, 188, 0.97)"],
     borderColor: "rgb(24, 35, 30)",
     data: data.map((a) => a.listAmontType.length),
     },
@@ -74,7 +76,9 @@ export default function GraphEventsYears() {
         <h1>כמות תקריות יחודיות לפי טווח שנים מבוקש</h1>
         <Select
         value={typeRequest}
-        onChange={handelSelect}
+        onChange={handleSelect}
+        displayEmpty
+        sx={{ width: 250 }}
         >
          <MenuItem value="" disabled>בחר טווח שנים</MenuItem>
          <MenuItem value="?tenYears=10">10 שנים אחרונות</MenuItem>
@@ -100,7 +104,7 @@ export default function GraphEventsYears() {
             <Button
             type="submit"
             variant="contained"
-            onClick={handelSubmit}
+            onClick={handleSubmit}
             sx={{ mt: 3, mb: 2 }}
             disabled={fromDate == "" }
             >בחר

@@ -3,4 +3,5 @@ export default interface topOrganizationDTO {
     eventsCount?: number,
     organization?: string,
     totalEvents?: number
+    casualties?: number
 }
