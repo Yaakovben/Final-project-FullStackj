@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import typesAttackDTO from '../../types/DTO/typesAttackDTO';
 import { fetchTop } from '../../Fetches/fetchTop';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import Chart from  'chart.js/auto'
 
@@ -43,7 +43,6 @@ export default function GraphTypesAttack() {
         },
         ],
     };
-
   return (
     <div className='graph-types'>
         <h1>סטטיסטיקת סוג התקפה לפי נפגעים</h1>

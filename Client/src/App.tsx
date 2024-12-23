@@ -19,7 +19,7 @@ export default function App() {
         <Route path="Graph-five-top-oraganization" element={<GraphFiveTopOrganization/>}/>
         <Route path="Graph-organization-by-years" element={<GraphOrgainzationByYears/>}/>
         <Route path="Updates-map" element={<UpdatesMap/>}/>
-        <Route path="/" element={<Navigate to={"/map"}/>} />
+        <Route path="/" element={<Navigate to={"/map-data"}/>} />
       </Routes >
     </div>
   );

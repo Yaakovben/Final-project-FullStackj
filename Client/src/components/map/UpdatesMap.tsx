@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { useEffect, useState } from "react";
 import topLocationDTO from "../../types/DTO/topLocationDTO";
 import SelectionData from "./SelectionData";
+import { fetchTop } from "../../Fetches/fetchTop";
 
 
 const customIcon = new L.Icon({
@@ -15,8 +16,18 @@ const customIcon = new L.Icon({
 
 export default function UpdatesMap() {
     const [data, setData] = useState<topLocationDTO[]>([]);
-      useEffect(() => {
+
+
+    const fetchData = async ()=>{
+        const response = await  fetchTop("http://localhost:8888/api/crud/get-all")
+        setData(response)
+    } 
+    
+    useEffect(() => {
+        fetchData();
         console.log(data);
+        
+       
       }, [data]);
   return (
     <div>
@@ -25,7 +36,7 @@ export default function UpdatesMap() {
         <MapContainer
                 className="map"
                 style={{
-                  height: "77vh",
+                  height: "85vh",
                   width: "100%",
                   padding: "15px",
                 }}

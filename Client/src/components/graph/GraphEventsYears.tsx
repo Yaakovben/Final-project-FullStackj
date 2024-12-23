@@ -62,7 +62,7 @@ export default function GraphEventsYears() {
     datasets: [
     {
     label: "דירוג תקריות יחודיות לפי טווח שנים",
-    backgroundColor: "rgba(86, 202, 60, 0.82)",
+    backgroundColor: "rgba(187, 138, 32, 0.82)",
     borderColor: "rgb(24, 35, 30)",
     data: data.map((a) => a.listAmontType.length),
     },
