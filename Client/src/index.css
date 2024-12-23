@@ -61,25 +61,26 @@ body {
 
 
 
- .input-years{
-  position: absolute;
+ .input-years, .input-city{
+    position: absolute;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: rgba(39, 205, 213, 0.586);
+    background-color: rgb(169, 212, 219);
     align-items: center;
     padding: 10px;
     border-radius: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  
    
  }
 
  .closeWindow{
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 2px;
+  right: 2px;
  }
 
  .closeWindow:hover{
@@ -115,6 +116,12 @@ body {
   padding-top: 10px;
   gap: 10px;
 
+}
+
+.top-organization{
+  background-color: rgba(232, 232, 223, 0.785);
+  padding: 50px;
+  border-radius: 10px;
 }
 
 

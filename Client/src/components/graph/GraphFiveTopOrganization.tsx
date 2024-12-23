@@ -10,14 +10,15 @@ Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Too
 
 export default function GraphFiveTopOrganization() {
     const [data, setData] = useState<topOrganizationDTO[]>([]);
-    const [allCity, setAllCity] = useState<string | null>("");
-    const [city, setCity] = useState<string | null>(null);
+    const [openInput, setOpenInput] = useState(false);
+    const [city, setCity] = useState<string | null>("");
     const [valueSelect, setValueSelect] = useState("");
+    const [valueInput, setValueInput] = useState("");
 
     const fetchData = async () => {
         try {
             const response = await fetchTop(
-                `http://localhost:8888/api/location/top-organization${allCity !="" ? `${allCity}` : city ? `${city}` : ""}`
+                `http://localhost:8888/api/location/top-organization/${city}`
             );
             setData(response);
             console.log(response);
@@ -29,17 +30,21 @@ export default function GraphFiveTopOrganization() {
 
     useEffect(() => {
         fetchData();
-    }, [allCity]);
+    }, [city]);
 
     const handleSelect = (event: SelectChangeEvent<string>) => {
         setValueSelect(event.target.value as string);
+        if( event.target.value === "byCity" ){
+            setOpenInput(true);
+        }else{
+            setCity("")
+        }
+
     };
 
     const handleSubmit = async () => {
-        setCity(valueSelect);
-        setAllCity("");
-        
-        fetchData();
+        setCity(valueInput);
+        setOpenInput(false);
     }
 
    
@@ -70,21 +75,23 @@ export default function GraphFiveTopOrganization() {
                 <MenuItem value="allCity">לפי כל האזורים</MenuItem>
                 <MenuItem value="byCity">לפי אזור</MenuItem>
             </Select>
-            {valueSelect === "byCity" && <div> 
-            <TextField placeholder="בחר אזור" value={city} onChange={(event) => setCity(event.target.value)}
+            {openInput && <div className="input-city"> 
+            <h4 className='closeWindow' onClick={() => setOpenInput(false)}>❌</h4>
+            <h3>בחירה לפי אזור</h3>
+            <TextField placeholder="בחר אזור" value={valueInput} onChange={(event) => setValueInput(event.target.value)}
              />
               <Button
                 type="submit"
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
-                disabled={city == "" }
+                disabled={valueInput == "" }
                 >בחר
             </Button>
              </div>
              }
             
-            <Pie data={organizationData} />
+            <Pie data={organizationData} className='top-organization' />
         </div>
     );
 }

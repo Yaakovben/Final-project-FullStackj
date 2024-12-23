@@ -18,7 +18,7 @@ export default function GraphEventsYears() {
     const fetchData = async()=>{
         try {
             if (typeRequest || (fromDate && endDate)) {
-                const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest != undefined ?  typeRequest:`?fromDate=${fromDate}&endDate=${endDate}` }`);
+                const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest}`);
                 if( response== "Can`t get top organization" || response == undefined){
                     alert("שגיאה בשליחת נתונים");
                 }else{
