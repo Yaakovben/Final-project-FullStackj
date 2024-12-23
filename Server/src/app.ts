@@ -6,6 +6,7 @@ import { seedAttack, seedMain, seedOrganization } from "./services/seedService";
 import typesAttackRoter from './routers/typesAttackRouter'
 import locationRouter from './routers/locationRouter'
 import yearRouter from './routers/yearRouter'
+import crudRouter from './routers/crudRouter'
 
 dotenv.config()
 const PORT = process.env.PORT || 3000
@@ -22,6 +23,7 @@ connectToMongo()
 app.use("/api/typesAttack",typesAttackRoter)
 app.use("/api/location",locationRouter)
 app.use("/api/year",yearRouter)
+app.use("/api/crud",crudRouter)
 
 
 app.listen(PORT, ()=>{ 
