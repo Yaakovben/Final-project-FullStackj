@@ -98,7 +98,6 @@ export default function GraphEventsYears() {
             </TextField>
             <h2>: בחר שנת סיום</h2>
             <TextField
-            
             type='number'
             value={endDate}
             style={{backgroundColor:"rgba(245, 243, 240, 0.94)"}}
