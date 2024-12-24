@@ -4,7 +4,7 @@ import  { useEffect, useState } from 'react';
 import topOrganizationDTO from '../../types/DTO/topOrganization';
 import { fetchTop } from '../../Fetches/fetchTop';
 import { Pie } from 'react-chartjs-2';
-import { Button, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { Button, CircularProgress, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
@@ -14,13 +14,15 @@ export default function GraphFiveTopOrganization() {
     const [city, setCity] = useState<string | null>("");
     const [valueSelect, setValueSelect] = useState("");
     const [valueInput, setValueInput] = useState("");
-
+    const [loading, setLoading] = useState(false);
     const fetchData = async () => {
         try {
+            setLoading(true);
             const response = await fetchTop(
                 `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${city}`);
             if(response.length == 0){ 
                 alert("לא נמצאו נתונים");
+                setLoading(false);
                 return
             }
             setData(response);
@@ -28,6 +30,7 @@ export default function GraphFiveTopOrganization() {
             
         } catch (err) {
             console.error(err);
+            setLoading(false);
         }
     };
 
@@ -98,7 +101,13 @@ export default function GraphFiveTopOrganization() {
              </div>
              }
             
-            <Pie data={organizationData} className='top-organization' />
+            {loading ? (
+                <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </div>
+            ) : (
+                <Pie data={organizationData} className='top-organization' />
+            )}
         </div>
     );
 }

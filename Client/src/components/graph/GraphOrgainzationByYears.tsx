@@ -4,21 +4,25 @@ import { useEffect, useState } from 'react'
 import {Line} from 'react-chartjs-2';
 import { fetchTop } from '../../Fetches/fetchTop';
 import orgnizationByYearsDTO from '../../types/DTO/orgnizationByYearsDTO';
-import { Button, TextField } from '@mui/material';
+import { Button, CircularProgress, TextField } from '@mui/material';
 Chart.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export default function GraphOrgainzationByYears() {
     const[data,setData] = useState<orgnizationByYearsDTO[]>([]);
     const[typeRequest,setTypeRequest] = useState<string>("Unknown");
     const[valyeInput,setValueInput] = useState<string>("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/year-organization/${typeRequest}`);
+                setLoading(false);
                 setData(response);
             } catch (err) {
-                console.log(err);   
+                console.log(err); 
+                setLoading(false);  
             }
         }
         fetchData();
@@ -58,7 +62,19 @@ export default function GraphOrgainzationByYears() {
                 >בחר
         </Button>
             </div>
-        <Line data={organizationData} className='top-organization' />
+
+
+            {loading ? (
+                <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </div>
+            ) : (
+                <Line data={organizationData} className='top-organization' />
+            )}
+
+
+
+       
     </div>
   )
 }

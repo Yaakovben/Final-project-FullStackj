@@ -4,6 +4,7 @@ import { fetchTop } from '../../Fetches/fetchTop';
 import { Bar } from 'react-chartjs-2';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import Chart from  'chart.js/auto'
+import { CircularProgress } from '@mui/material';
 
 Chart.register(
     CategoryScale,
@@ -17,14 +18,18 @@ Chart.register(
   
 export default function GraphTypesAttack() {
     const [data, setData] = useState<typesAttackDTO[] >([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
+            setLoading(true);
             try {
                 const response = await fetchTop("https://final-project-fullstackj-2.onrender.com/api/typesAttack/get-rating");
+                setLoading(false);
                 setData(response); 
             } catch (err) {
                 console.log(err);   
+                setLoading(false);
             }
         }
         fetchData();  
@@ -46,7 +51,17 @@ export default function GraphTypesAttack() {
   return (
     <div className='graph-types'>
         <h1>סטטיסטיקת סוג התקפה לפי נפגעים</h1>
-        <Bar  data={graphTypes}  />
+        {loading ? (
+                <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </div>
+            ) : (
+                <Bar  data={graphTypes}  />
+            )}
+
+
+
+       
     </div>
 
   )

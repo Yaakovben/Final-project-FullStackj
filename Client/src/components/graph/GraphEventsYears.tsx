@@ -3,7 +3,7 @@ import { eventsForYearsDTO } from '../../types/DTO/eventsForYearsDTO';
 import { fetchTop } from '../../Fetches/fetchTop';
 import { Bar} from 'react-chartjs-2';
 import Chart, { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js/auto';
-import { Button, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { Button, CircularProgress, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 Chart.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
 
 
@@ -13,21 +13,24 @@ export default function GraphEventsYears() {
     const[openInput,setOpenInput] = useState(false);
     const[fromDate,setFromDate] = useState("")
     const[endDate,setEndDate] = useState("")
-
+    const [loading, setLoading] = useState(false);
 
     const fetchData = async()=>{
+        setLoading(true); 
         try {
             if (typeRequest || (fromDate && endDate)) {
                 const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/attack-by-dates${typeRequest}`);
                 if( response== "Can`t get top organization" || response == undefined){
                     alert("שגיאה בשליחת נתונים");
                 }else{
+                    setLoading(false);
                     console.log(response)    
                     setData(response);
                 }
             }
         } catch (err) {
-            console.log(err);   
+            console.log(err);
+            setLoading(false);   
         }
     }
     useEffect(()=>{
@@ -114,8 +117,17 @@ export default function GraphEventsYears() {
             >בחר
             </Button>
         </div> }
+
+
+        {loading ? (
+                <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <CircularProgress />
+            </div>
+            ) : (
+                <Bar data={graphYears} className='the-graph-events-years' />
+            )}
       
-        <Bar data={graphYears} className='the-graph-events-years' />
+       
     </div>
   )
 }
