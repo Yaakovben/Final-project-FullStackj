@@ -24,7 +24,7 @@ export default function SelectionData({ setData }: Props) {
         const locationData = await fetchTop(
           `https://final-project-fullstackj-2.onrender.com/api/location/top-location/${valueOfInputLocation}`
         );
-        if (locationData && locationData[0] != null) {
+        if (locationData && Array.isArray(locationData) && locationData.length > 0) {
           console.log(locationData);
           console.log(valueOfInputLocation);
           setData(locationData);
@@ -32,11 +32,12 @@ export default function SelectionData({ setData }: Props) {
           console.log(locationData);
           alert("לא נמצא אזור");
         }
+        
       } else if (valueOfSelection === "fetchTopOranization") {
         const oranizationData = await fetchTop(
           `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${valueOfInputOrganization}`
         );
-        if (oranizationData && oranizationData[0] != null) {
+        if (oranizationData && Array.isArray(oranizationData) && oranizationData.length > 0) {
           console.log(oranizationData);
           setData(oranizationData);
         } else {
@@ -103,7 +104,7 @@ export default function SelectionData({ setData }: Props) {
             onChange={(e) =>
               setValueOfInputLocationForOrganization(e.target.value)
             }
-            placeholder="חפש לפי עיר פעילות הארגון"
+            placeholder="חפש לפי ארגון"
             variant="outlined"
             style={{ marginTop: 20 }}
           />
