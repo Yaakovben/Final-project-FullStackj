@@ -4,9 +4,8 @@ import { fetchTop } from '../../Fetches/fetchTop';
 import { Bar} from 'react-chartjs-2';
 import Chart, { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js/auto';
 import { Button, CircularProgress, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
-import { blue } from '@mui/material/colors';
-Chart.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
 
+Chart.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
 
 export default function GraphEventsYears() {
     const[typeRequest,setTypeRequest] = useState<string|undefined>("?tenYears=10");
