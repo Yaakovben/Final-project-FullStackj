@@ -56,7 +56,7 @@ export default function GraphOrgainzationByYears() {
                 style={{ backgroundColor: "#7f6d41" }}
                 disabled={valyeInput === ""}
                 >בחר
-            </Button>
+        </Button>
             </div>
         <Line data={organizationData} className='top-organization' />
     </div>

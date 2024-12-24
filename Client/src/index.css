@@ -99,15 +99,13 @@ body {
     transform: translate(-50%, -50%);
     z-index: 9999;
     box-shadow: #fffefe 0px 1px 1px 1px, #bd9f52e3 0px 0px 0px 3px;
-    
-  
-   
  }
 
  .closeWindow{
   position: absolute;
   top: 2px;
   right: 2px;
+  
  }
 
  .closeWindow:hover{
@@ -184,6 +182,26 @@ body {
 .submit-button{
   color: #AC814B;
 }
+
+
+
+.map-update{
+  
+}
+.window-update{
+  position: absolute;
+  background-color: white;
+  width: 50vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: #fffefe 0px 1px 1px 1px, #bd9f52e3 0px 0px 0px 3px;
+  z-index: 1000; 
+}
+
 
 
 
