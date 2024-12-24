@@ -20,8 +20,10 @@ export default function GraphFiveTopOrganization() {
             setLoading(true);
             const response = await fetchTop(
                 `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${city}`);
-            if(response.length == 0){ 
-                alert("לא נמצאו נתונים");
+            console.log(response);
+            
+            if(response=== undefined){ 
+                
                 setLoading(false);
                 return
             }
@@ -33,7 +35,7 @@ export default function GraphFiveTopOrganization() {
             setLoading(false);
         }
     };
-    
+
     useEffect(() => {
         fetchData();
     }, [city]);
