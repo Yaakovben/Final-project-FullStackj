@@ -62,8 +62,6 @@ export default function GraphOrgainzationByYears() {
                 >בחר
         </Button>
             </div>
-
-
             {loading ? (
                 <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <CircularProgress />
@@ -71,10 +69,6 @@ export default function GraphOrgainzationByYears() {
             ) : (
                 <Line data={organizationData} className='top-organization' />
             )}
-
-
-
-       
     </div>
   )
 }

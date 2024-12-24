@@ -58,7 +58,7 @@ export default function GraphEventsYears() {
         setTypeRequest(`?firstyear=${fromDate}&lastyear=${endDate}`);
         setOpenInput(false);
     }
-
+    
     const labels = data.map((t) => t.year);
     const graphYears = {
     labels: labels,
@@ -72,10 +72,7 @@ export default function GraphEventsYears() {
     ],
 };
 
-
   return (
-
-
     <div className="graph-events-years">
         <h1>כמות תקריות יחודיות לפי טווח שנים מבוקש</h1>
         <Select
@@ -118,7 +115,6 @@ export default function GraphEventsYears() {
             </Button>
         </div> }
 
-
         {loading ? (
                 <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <CircularProgress />
@@ -126,8 +122,6 @@ export default function GraphEventsYears() {
             ) : (
                 <Bar data={graphYears} className='the-graph-events-years' />
             )}
-      
-       
     </div>
   )
 }

@@ -22,7 +22,6 @@ export default function MapData() {
   return (
     <div className="map-data">
       <SelectionData setData={setData} />
-
       <MapContainer
         className="map"
         style={{
@@ -38,11 +37,9 @@ export default function MapData() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-
         <Marker icon={customIcon} position={[31.8517, 35.2656]}>
           <Popup>TEST</Popup>
         </Marker>
-
         {data.length > 0 &&
           data.map((e, index) => (
             <Marker key={index} icon={customIcon} position={[e.lat, e.long]} >

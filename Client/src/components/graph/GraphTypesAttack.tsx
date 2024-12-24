@@ -58,11 +58,6 @@ export default function GraphTypesAttack() {
             ) : (
                 <Bar  data={graphTypes}  />
             )}
-
-
-
-       
     </div>
-
   )
 }

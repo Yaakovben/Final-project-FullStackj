@@ -33,7 +33,7 @@ export default function GraphFiveTopOrganization() {
             setLoading(false);
         }
     };
-
+    
     useEffect(() => {
         fetchData();
     }, [city]);
@@ -45,7 +45,6 @@ export default function GraphFiveTopOrganization() {
         }else{
             setCity("")
         }
-
     };
 
     const handleSubmit = async () => {
@@ -54,7 +53,6 @@ export default function GraphFiveTopOrganization() {
         setValueSelect("");
     }
 
-   
     const organizationData = {
         labels: data.map((item) => item.name? item.name : item.organization),
         datasets: [
@@ -99,8 +97,7 @@ export default function GraphFiveTopOrganization() {
                 >בחר
             </Button>
              </div>
-             }
-            
+             }  
             {loading ? (
                 <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <CircularProgress />
