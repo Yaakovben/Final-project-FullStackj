@@ -1,7 +1,7 @@
 import  { useState } from "react";
 import { fetchTop } from "../../Fetches/fetchTop";
 import {Button,MenuItem,Select,SelectChangeEvent,TextField,} from "@mui/material";
-import allCitiesDTO from "../../types/DTO/allCitiesDTO";
+
 
 export interface Props {
   setData: (data: any) => void;
@@ -9,7 +9,6 @@ export interface Props {
 
 export default function SelectionData({ setData }: Props) {
   const [valueOfSelection, setValueOfSelection] = useState("");
-  const [allCites, setAllCites] = useState<allCitiesDTO[]>([]);
   const [valueOfInputLocation, setValueOfInputLocation] = useState("");
   const [valueOfInputOrganization, setValueOfInputOrganization] = useState("");
   const [valueOfInputLocationForOrganization,setValueOfInputLocationForOrganization,] = useState("");
@@ -22,7 +21,7 @@ export default function SelectionData({ setData }: Props) {
     try {
       if (valueOfSelection === "fetchTopLocation") {
         const locationData = await fetchTop(
-          `http://localhost:8888/api/location/top-location/${valueOfInputLocation}`
+          `https://final-project-fullstackj-2.onrender.com/api/location/top-location/${valueOfInputLocation}`
         );
         if (locationData && locationData[0] !== null) {
           console.log(locationData);
@@ -34,7 +33,7 @@ export default function SelectionData({ setData }: Props) {
         }
       } else if (valueOfSelection === "fetchTopOranization") {
         const oranizationData = await fetchTop(
-          `http://localhost:8888/api/location/top-organization/${valueOfInputOrganization}`
+          `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${valueOfInputOrganization}`
         );
         if (oranizationData && oranizationData.length > 0) {
           console.log(oranizationData);
@@ -45,7 +44,7 @@ export default function SelectionData({ setData }: Props) {
         }
       } else if (valueOfSelection === "fetchTopLocationForOrganization") {
         const topLocationData = await fetchTop(
-          `http://localhost:8888/api/location/top-location-for-organization/${valueOfInputLocationForOrganization}`
+          `https://final-project-fullstackj-2.onrender.com/api/location/top-location-for-organization/${valueOfInputLocationForOrganization}`
         );
         if (topLocationData && topLocationData.length > 0) {
           console.log(topLocationData);

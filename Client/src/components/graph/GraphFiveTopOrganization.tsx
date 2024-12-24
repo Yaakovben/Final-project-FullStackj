@@ -18,7 +18,7 @@ export default function GraphFiveTopOrganization() {
     const fetchData = async () => {
         try {
             const response = await fetchTop(
-                `http://localhost:8888/api/location/top-organization/${city}`);
+                `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${city}`);
             if(response.length == 0){ 
                 alert("לא נמצאו נתונים");
                 return

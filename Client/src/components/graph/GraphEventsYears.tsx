@@ -18,7 +18,7 @@ export default function GraphEventsYears() {
     const fetchData = async()=>{
         try {
             if (typeRequest || (fromDate && endDate)) {
-                const response = await fetchTop(`http://localhost:8888/api/year/attack-by-dates${typeRequest}`);
+                const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/attack-by-dates${typeRequest}`);
                 if( response== "Can`t get top organization" || response == undefined){
                     alert("שגיאה בשליחת נתונים");
                 }else{

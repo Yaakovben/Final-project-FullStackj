@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import typesAttackDTO from '../../types/DTO/typesAttackDTO';
 import { fetchTop } from '../../Fetches/fetchTop';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import Chart from  'chart.js/auto'
 
@@ -21,7 +21,7 @@ export default function GraphTypesAttack() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetchTop("http://localhost:8888/api/typesAttack/get-rating");
+                const response = await fetchTop("https://final-project-fullstackj-2.onrender.com/api/typesAttack/get-rating");
                 setData(response); 
             } catch (err) {
                 console.log(err);   

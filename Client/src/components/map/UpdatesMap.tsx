@@ -24,7 +24,7 @@ export default function UpdatesMap() {
   const[openWindow,setOpenWindow]= useState(false);
 
   const fetchData = async () => {
-    const response = await fetchTop("http://localhost:8888/api/crud/get-all");
+    const response = await fetchTop("https://final-project-fullstackj-2.onrender.com/api/crud/get-all");
     setData(response);
   };
 
@@ -33,7 +33,7 @@ export default function UpdatesMap() {
         if(organization ==="" || casualties <= 0 ){
             alert("all fields are required");
         }
-        const res: Response = await fetch("http://localhost:8888/api/crud/add-new", {
+        const res: Response = await fetch("https://final-project-fullstackj-2.onrender.com/api/crud/add-new", {
 
           body: JSON.stringify({ name: organization, casualties: casualties, lat: lat, long: long}),
           method: 'POST',
@@ -48,12 +48,13 @@ export default function UpdatesMap() {
          
       }
       const data = await res.json();
-      // return data;
       setnewdata(data)
       setCasualties(0)
       setOrganization("")
   } catch (err) {
-      console.log(err);    
+      console.log(err);
+      console.log(newdata);
+          
   }
     setOpenWindow(false)
   }
@@ -69,7 +70,6 @@ export default function UpdatesMap() {
     const map = useMapEvents({
       click: (e) => {
         map.locate()
-        // setnewdata([...newdata, { lat: e.latlng.lat, long: e.latlng.lng }])
         setLat(e.latlng.lat)
         setLong(e.latlng.lng)
         setOpenWindow(true) 
@@ -84,6 +84,8 @@ export default function UpdatesMap() {
 
   function handleClose(): void {
     setOpenWindow(false);
+    
+  
   }
 
   return (

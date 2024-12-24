@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import { useEffect, useState } from 'react'
-import { Bar, Line, Pie } from 'react-chartjs-2';
+import {Line} from 'react-chartjs-2';
 import { fetchTop } from '../../Fetches/fetchTop';
 import orgnizationByYearsDTO from '../../types/DTO/orgnizationByYearsDTO';
 import { Button, TextField } from '@mui/material';
@@ -15,7 +15,7 @@ export default function GraphOrgainzationByYears() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetchTop(`http://localhost:8888/api/year/year-organization/${typeRequest}`);
+                const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/year-organization/${typeRequest}`);
                 setData(response);
             } catch (err) {
                 console.log(err);   
