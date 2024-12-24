@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { getAllEvents } from "../controllers/crudController";
+import { addNewEvent, getAllEvents } from "../controllers/crudController";
 
 const router = Router()
 
 router.get("/get-all",getAllEvents)
+router.get("/add-new",addNewEvent)
 
 
 export default router

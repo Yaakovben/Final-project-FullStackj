@@ -52,6 +52,7 @@ body {
     width: 100vw;
     padding: 15px;
     gap: 10px;
+   
   }
 
   .leaflet-popup-content{
@@ -85,12 +86,13 @@ body {
 
 
 
- .input-years, .input-city{
+ .input-years{
     position: absolute;
     display: flex;
     flex-direction: column;
+    
     gap: 10px;
-    background-color: #bd9f52e3;
+    background-color: #dcbb6e;
     align-items: center;
     padding: 10px;
     border-radius: 10px;
@@ -99,6 +101,34 @@ body {
     transform: translate(-50%, -50%);
     z-index: 9999;
     box-shadow: #fffefe 0px 1px 1px 1px, #bd9f52e3 0px 0px 0px 3px;
+    background-image:url(https://www.idf.il/media/ysmdfak3/badge_of_the_israeli_defense_forces_2022_version.svg) ;
+    background-repeat: repeat-x;
+    background-size: cover;
+    background-size: 100% 100%;
+    
+ }
+
+ .input-city{
+  position: absolute;
+    display: flex;
+    flex-direction: column;
+    
+    gap: 10px;
+    background-color: #dcbb6e;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    box-shadow: #fffefe 0px 1px 1px 1px, #bd9f52e3 0px 0px 0px 3px;
+    background-image:url(https://www.idf.il/media/ysmdfak3/badge_of_the_israeli_defense_forces_2022_version.svg) ;
+    background-repeat: repeat-x;
+    background-size: cover;
+    background-size: 100% 100%;
+    height: 250px;
+
  }
 
  .closeWindow{
@@ -153,6 +183,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
   
 }
 

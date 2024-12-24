@@ -79,19 +79,19 @@ export default function GraphFiveTopOrganization() {
                 <MenuItem value="allCity">לפי כל האזורים</MenuItem>
                 <MenuItem value="byCity">לפי אזור</MenuItem>
             </Select>
-            {openInput && <div className="input-city"> 
+            {openInput &&  <div className="input-city"> 
             <h4 className='closeWindow' onClick={() => setOpenInput(false)}>❌</h4>
             <h3>בחירה לפי אזור</h3>
             <TextField placeholder="בחר אזור" value={valueInput} 
             onChange={(event) => setValueInput(event.target.value)}
-            style={{backgroundColor:"rgba(235, 214, 161, 0.94)"}}
+            style={{backgroundColor:"rgba(243, 241, 237, 0.94)"}}
              />
               <Button
                 type="submit"
                 variant="contained"
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
-                style={{ backgroundColor: "#7f6d41" }}
+                style={{  backgroundColor: valueInput == "" ? 'rgba(193, 184, 162, 0.44)' : ' #7f6d41', }}
                 disabled={valueInput == "" }
                 >בחר
             </Button>

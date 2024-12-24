@@ -92,15 +92,16 @@ export default function GraphEventsYears() {
             <TextField
             type='number'
             value={fromDate}
-            style={{backgroundColor:"rgba(235, 214, 161, 0.94)"}}
+            style={{backgroundColor:"rgba(248, 246, 242, 0.94)"}}
             onChange={(e) => setFromDate(e.target.value as string)}
             >     
             </TextField>
             <h2>: בחר שנת סיום</h2>
             <TextField
+            
             type='number'
             value={endDate}
-            style={{backgroundColor:"rgba(235, 214, 161, 0.94)"}}
+            style={{backgroundColor:"rgba(245, 243, 240, 0.94)"}}
             onChange={(e) => setEndDate(e.target.value as string)}
             >     
             </TextField>
@@ -109,7 +110,7 @@ export default function GraphEventsYears() {
             variant="contained"
             onClick={handleSubmit}
             sx={{ mt: 3, mb: 2 }}
-            style={{ backgroundColor:" #7f6d41" }}
+            style={{  backgroundColor: fromDate == "" ? 'rgba(193, 184, 162, 0.44)' : ' #7f6d41', }}
             disabled={fromDate == "" }
             >בחר
             </Button>

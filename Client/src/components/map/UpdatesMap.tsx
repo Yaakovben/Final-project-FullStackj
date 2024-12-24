@@ -16,7 +16,7 @@ const customIcon = new L.Icon({
 
 export default function UpdatesMap() {
   const [data, setData] = useState<topLocationDTO[]>([]);
-  const [newdata, setnewdata] = useState<creatNewDTO>([]);
+  const [newdata, setnewdata] = useState<creatNewDTO>();
   const [lat,setLat]= useState<number>(0);
   const [long,setLong]= useState<number>(0);
   const[organization,setOrganization]= useState<string>("");
@@ -28,8 +28,33 @@ export default function UpdatesMap() {
     setData(response);
   };
 
-  const handleAdd = ()=>{
-    setnewdata({ lat, long, organization, casualties });
+  const handleAdd = async()=>{
+    try {
+        if(organization ==="" || casualties <= 0 ){
+            alert("all fields are required");
+        }
+        const res: Response = await fetch("http://localhost:8888/api/crud/add-new", {
+
+          body: JSON.stringify({ name: organization, casualties: casualties, lat: lat, long: long}),
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        
+        });
+        
+      console.log(res);
+      
+      if (!res.ok) {
+        console.log("Can`t add new eventTYTY");
+         
+      }
+      const data = await res.json();
+      // return data;
+      setnewdata(data)
+      setCasualties(0)
+      setOrganization("")
+  } catch (err) {
+      console.log(err);    
+  }
     setOpenWindow(false)
   }
 
@@ -37,6 +62,7 @@ export default function UpdatesMap() {
   useEffect(() => {
     fetchData();
   }, []);
+  
 
 
   function MyComponent() {
@@ -56,8 +82,8 @@ export default function UpdatesMap() {
   }
   
 
-  function handleClose(event: {}, reason: "backdropClick" | "escapeKeyDown"): void {
-    throw new Error("Function not implemented.");
+  function handleClose(): void {
+    setOpenWindow(false);
   }
 
   return (
@@ -97,12 +123,14 @@ export default function UpdatesMap() {
               label="ארגון"
               multiline
               value={organization}
+              onChange={(e) => setOrganization(e.target.value)}
               maxRows={4}
             />
              <TextField
               id="outlined-multiline-flexible"
               label="נפגעים"
               multiline
+              onChange={(e) => setCasualties(parseInt(e.target.value))}
               value={casualties}
               maxRows={4}
             />
@@ -110,12 +138,14 @@ export default function UpdatesMap() {
             disabled
             id="outlined-disabled"
             label="נ.צ רוחבי"
+            onChange={(e) => setLong(parseFloat(e.target.value))}
             defaultValue={long}
             />
             <TextField
             disabled
             id="outlined-disabled"
             label="נ.צ אופקי"
+            onChange={(e) => setLat(parseFloat(e.target.value))}
             defaultValue={lat}
             />
              <Button
@@ -150,16 +180,18 @@ export default function UpdatesMap() {
         ))}
 
         {
-          newdata.map((e, index) => (
-            <Marker key={index} icon={customIcon} position={[e.lat, e.long]}>
+          
+            <Marker  icon={customIcon} position={[lat, long]}>
               <Popup>
                 <div className="popup-map">
-                  {e.lat && <p><strong>נ.צ אופקי:</strong> {e.lat}</p>}
-                  {e.long && <p><strong>נ.צ רוחבי:</strong> {e.long}</p>}
+                  {organization && <p><strong>אירגון:</strong> {organization}</p>}
+                  {casualties && <p><strong>מספר נפגעים:</strong> {casualties}</p>}
+                  {lat && <p><strong>נ.צ אופקי:</strong> {lat}</p>}
+                  {long && <p><strong>נ.צ רוחבי:</strong> {long}</p>}
                 </div>
               </Popup>
             </Marker>
-          ))
+          
         }
 
 
