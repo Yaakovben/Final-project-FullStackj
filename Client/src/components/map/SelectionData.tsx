@@ -1,6 +1,6 @@
 import  { useState } from "react";
 import { fetchTop } from "../../Fetches/fetchTop";
-import {Button,MenuItem,Select,SelectChangeEvent,TextField,} from "@mui/material";
+import {Button,CircularProgress,MenuItem,Select,SelectChangeEvent,TextField,} from "@mui/material";
 
 
 export interface Props {
@@ -12,18 +12,19 @@ export default function SelectionData({ setData }: Props) {
   const [valueOfInputLocation, setValueOfInputLocation] = useState("");
   const [valueOfInputOrganization, setValueOfInputOrganization] = useState("");
   const [valueOfInputLocationForOrganization,setValueOfInputLocationForOrganization,] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const handleChange = async (event: SelectChangeEvent<string>) => {
     setValueOfSelection(event.target.value as string);
   };
 
   const handelSubmit = async () => {
+    setIsLoading(true);
     try {
       if (valueOfSelection === "fetchTopLocation") {
         const locationData = await fetchTop(
           `https://final-project-fullstackj-2.onrender.com/api/location/top-location/${valueOfInputLocation}`
         );
-        if (locationData && locationData[0] !== null) {
+        if (locationData && locationData[0] != null) {
           console.log(locationData);
           console.log(valueOfInputLocation);
           setData(locationData);
@@ -35,7 +36,7 @@ export default function SelectionData({ setData }: Props) {
         const oranizationData = await fetchTop(
           `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${valueOfInputOrganization}`
         );
-        if (oranizationData && oranizationData.length > 0) {
+        if (oranizationData && oranizationData[0] != null) {
           console.log(oranizationData);
           setData(oranizationData);
         } else {
@@ -57,6 +58,8 @@ export default function SelectionData({ setData }: Props) {
     } catch (err) {
       console.log(err);
       setData([]);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -113,7 +116,7 @@ export default function SelectionData({ setData }: Props) {
         onClick={handelSubmit}
         style={{ marginTop: 20, backgroundColor:"#7f6d41", width: 120, height: 40 }}
       >
-        שליחה
+        {isLoading ? <CircularProgress size={24} /> : 'שליחה'}
       </Button>
     </div>
   );

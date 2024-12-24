@@ -4,6 +4,7 @@ import { fetchTop } from '../../Fetches/fetchTop';
 import { Bar} from 'react-chartjs-2';
 import Chart, { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js/auto';
 import { Button, CircularProgress, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
+import { blue } from '@mui/material/colors';
 Chart.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
 
 
@@ -20,7 +21,7 @@ export default function GraphEventsYears() {
         try {
             if (typeRequest || (fromDate && endDate)) {
                 const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/attack-by-dates${typeRequest}`);
-                if( response== "Can`t get top organization" || response == undefined){
+                if( response== "Can`t get top organization" ){
                     alert("שגיאה בשליחת נתונים");
                 }else{
                     setLoading(false);
@@ -58,14 +59,14 @@ export default function GraphEventsYears() {
         setTypeRequest(`?firstyear=${fromDate}&lastyear=${endDate}`);
         setOpenInput(false);
     }
-    
+
     const labels = data.map((t) => t.year);
     const graphYears = {
     labels: labels,
     datasets: [
     {
     label: "דירוג תקריות יחודיות לפי טווח שנים",
-    backgroundColor: "rgba(187, 138, 32, 0.82)",
+    backgroundColor: ["rgba(237, 12, 12, 0.82)","blue","rgba(60, 202, 140, 0.95)"],
     borderColor: "rgb(24, 35, 30)",
     data: data.map((a) => a.listAmontType.length),
     },
@@ -76,7 +77,7 @@ export default function GraphEventsYears() {
     <div className="graph-events-years">
         <h1>כמות תקריות יחודיות לפי טווח שנים מבוקש</h1>
         <Select
-        value={typeRequest}
+        value={typeRequest || "בחר טווח שנים"}
         onChange={handleSelect}
         displayEmpty
         sx={{ width: 250 }}

@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 import { CategoryScale, Legend, LinearScale, LineElement, PointElement, Title, Tooltip } from 'chart.js';
 import { useEffect, useState } from 'react'
-import {Line} from 'react-chartjs-2';
+import { Pie} from 'react-chartjs-2';
 import { fetchTop } from '../../Fetches/fetchTop';
 import orgnizationByYearsDTO from '../../types/DTO/orgnizationByYearsDTO';
 import { Button, CircularProgress, TextField } from '@mui/material';
@@ -67,7 +67,7 @@ export default function GraphOrgainzationByYears() {
                 <CircularProgress />
             </div>
             ) : (
-                <Line data={organizationData} className='top-organization' />
+                <Pie data={organizationData} className='top-organization' />
             )}
     </div>
   )
