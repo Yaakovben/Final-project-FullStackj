@@ -36,7 +36,7 @@ export default function GraphTypesAttack() {
     }, [])
     console.log(data);
 
-    const labels = data.map((item) => item.name);
+    const labels =  data.map((item) => item.name);
         const graphTypes = {
         labels: labels,
         datasets: [
@@ -52,7 +52,7 @@ export default function GraphTypesAttack() {
     <div className='graph-types'>
         <h1>סטטיסטיקת סוג התקפה לפי נפגעים</h1>
         {loading ? (
-                <div className="loading-indicator" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+                <div className="loading-overlay" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
                 <CircularProgress />
             </div>
             ) : (

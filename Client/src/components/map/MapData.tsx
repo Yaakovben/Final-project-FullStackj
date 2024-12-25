@@ -40,7 +40,7 @@ export default function MapData() {
         <Marker icon={customIcon} position={[31.8517, 35.2656]}>
           <Popup>TEST</Popup>
         </Marker>
-        {data.length > 0 &&
+        {data.length > 0 && data[0] !=null &&
           data.map((e, index) => (
             <Marker key={index} icon={customIcon} position={[e.lat, e.long]} >
               <Popup >

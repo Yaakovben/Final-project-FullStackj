@@ -1,6 +1,7 @@
 import  { useState } from "react";
 import { fetchTop } from "../../Fetches/fetchTop";
 import {Button,CircularProgress,MenuItem,Select,SelectChangeEvent,TextField,} from "@mui/material";
+import { data } from "react-router-dom";
 
 
 export interface Props {
@@ -24,25 +25,27 @@ export default function SelectionData({ setData }: Props) {
         const locationData = await fetchTop(
           `https://final-project-fullstackj-2.onrender.com/api/location/top-location/${valueOfInputLocation}`
         );
-        if (locationData && Array.isArray(locationData) && locationData.length > 0) {
+        if (locationData && locationData.length > 0 && locationData[0] != null)
+        {
           console.log(locationData);
           console.log(valueOfInputLocation);
           setData(locationData);
         } else {
           console.log(locationData);
           alert("לא נמצא אזור");
+          setData([]);
         }
-        
       } else if (valueOfSelection === "fetchTopOranization") {
         const oranizationData = await fetchTop(
           `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${valueOfInputOrganization}`
         );
-        if (oranizationData && Array.isArray(oranizationData) && oranizationData.length > 0) {
+        if (oranizationData && oranizationData.length > 0) {
           console.log(oranizationData);
           setData(oranizationData);
         } else {
           console.log(oranizationData);
           alert("לא נמצא אזור");
+          setData([]);
         }
       } else if (valueOfSelection === "fetchTopLocationForOrganization") {
         const topLocationData = await fetchTop(
@@ -54,15 +57,19 @@ export default function SelectionData({ setData }: Props) {
         } else {
           console.log(topLocationData);
           alert("לא נמצא ארגון");
+          setData([]);
         }
       }
     } catch (err) {
       console.log(err);
-      setData([]);
+      alert("שגיאה: לא ניתן לבצע את הפעולה כרגע");
+      
     } finally {
       setIsLoading(false);
     }
   };
+  console.log(data);
+  
 
   return (
     <div className="selection-data">

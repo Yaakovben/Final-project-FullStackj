@@ -1,11 +1,5 @@
 import mongoose, { Schema, Types } from "mongoose";
 
-
-
-
-
-
-
 export  interface IYear extends Document {
     year:number,
     listAmontType:[{typeAttack:string,ampount:number}],

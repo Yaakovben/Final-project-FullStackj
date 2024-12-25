@@ -22,15 +22,15 @@ export default function GraphFiveTopOrganization() {
                 `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${city}`);
             console.log(response);
             
-            if(response=== undefined){ 
-                
+            if(response=== undefined  || response.length === 0){
                 setLoading(false);
-                return
+                alert("לא נמצא אזור");
+                
             }
             setData(response);
-            console.log(response);
-            
-        } catch (err) {
+            console.log(data); 
+            setLoading(false);
+        }catch (err) {
             console.error(err);
             setLoading(false);
         }
@@ -54,6 +54,8 @@ export default function GraphFiveTopOrganization() {
         setOpenInput(false);
         setValueSelect("");
     }
+    console.log(data);
+    
 
     const organizationData = {
         labels: data.map((item) => item.name? item.name : item.organization),
