@@ -57,7 +57,7 @@ export default function NavBar() {
             >
                 <List>
                     <ListItem className="listItem" >
-                        <ListItemText primary="מפה נתונים" onClick={()=>handle("/map-data")}/>
+                        <ListItemText primary="מפת נתונים" onClick={()=>handle("/map-data")}/>
                     </ListItem>
                     <ListItem className="listItem" >
                         <ListItemText primary="גרף סוגי התקפות" onClick={()=>handle("/Graph-typesattack")}/>
