@@ -17,7 +17,7 @@ export default function GraphOrgainzationByYears() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/year-organization/${typeRequest}`);
+                const response = await fetchTop(`https://final-project-fullstackj-100.onrender.com/api/year/year-organization/${typeRequest}`);
                 setLoading(false);
                 setData(response);
             } catch (err) {

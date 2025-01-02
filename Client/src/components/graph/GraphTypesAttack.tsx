@@ -24,12 +24,9 @@ export default function GraphTypesAttack() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await fetchTop("https://final-project-fullstackj-2.onrender.com/api/typesAttack/get-rating");
-                if(response.ok){
-                    
-                    setLoading(false);
-                    setData(response); 
-                }
+                const response = await fetchTop("https://final-project-fullstackj-100.onrender.com/api/typesAttack/get-rating");
+                setLoading(false);
+                setData(response); 
             } catch (err) {
                 console.log(err);   
                 setLoading(false);

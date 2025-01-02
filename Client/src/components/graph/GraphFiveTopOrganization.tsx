@@ -19,7 +19,7 @@ export default function GraphFiveTopOrganization() {
         try {
             setLoading(true);
             const response = await fetchTop(
-                `https://final-project-fullstackj-2.onrender.com/api/location/top-organization/${city}`);
+                `https://final-project-fullstackj-100.onrender.com/api/location/top-organization/${city}`);
             console.log(response);
             
             if(response=== undefined  || response.length === 0){

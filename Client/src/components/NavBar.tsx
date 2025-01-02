@@ -11,7 +11,6 @@ export default function NavBar() {
     const handle = (url: string) => {
         navigate(url);
         setIsOpen(false);
-      
     }
     const toggleDrawer =(open: boolean) => () => {
             setIsOpen(open);
@@ -19,7 +18,6 @@ export default function NavBar() {
 
     return (
         <>
-       
             <AppBar position="static">
             <Container maxWidth="xl" sx={{ backgroundColor: "#7f6d41" }}>
                 <Toolbar variant="dense">
@@ -32,7 +30,6 @@ export default function NavBar() {
                     >
                         <MenuIcon />
                     </IconButton>
-                   
                     <Typography variant="h5" color="#white" sx={{
                             flexGrow: 1,
                             textAlign: "center",

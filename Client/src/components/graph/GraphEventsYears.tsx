@@ -19,7 +19,7 @@ export default function GraphEventsYears() {
         setLoading(true); 
         try {
             if (typeRequest || (fromDate && endDate)) {
-                const response = await fetchTop(`https://final-project-fullstackj-2.onrender.com/api/year/attack-by-dates${typeRequest}`);
+                const response = await fetchTop(`https://final-project-fullstackj-100.onrender.com/api/year/attack-by-dates${typeRequest}`);
                 if( response== "Can`t get top organization" ){
                     alert("שגיאה בשליחת נתונים");
                 }else{
