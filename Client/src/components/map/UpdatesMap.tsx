@@ -24,7 +24,7 @@ export default function UpdatesMap() {
   const[openWindow,setOpenWindow]= useState(false);
 
   const fetchData = async () => {
-    const response = await fetchTop("https://final-project-fullstackj-2.onrender.com/api/crud/get-all");
+    const response = await fetchTop("https://final-project-fullstackj-100.onrender.com/api/crud/get-all");
     setData(response);
   };
 
@@ -33,7 +33,7 @@ export default function UpdatesMap() {
         if(organization ==="" || casualties <= 0 ){
             alert("all fields are required");
         }
-        const res: Response = await fetch("https://final-project-fullstackj-100.onrender.com/api/crud/add-new", {
+        const res: Response = await fetch("https://final-project-fullstackj-100.onrender.com/https://final-project-fullstackj-100.onrender.com/api/crud/add-new", {
 
           body: JSON.stringify({ name: organization, casualties: casualties, lat: lat, long: long}),
           method: 'POST',

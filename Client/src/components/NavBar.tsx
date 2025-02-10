@@ -41,7 +41,9 @@ export default function NavBar() {
                    
                     <IconButton  sx={{
                                         marginLeft: "auto",
+                                        
                                     }}>
+                                        
                                 <Avatar alt="Remy Sharp" src="https://www.idf.il/media/ysmdfak3/badge_of_the_israeli_defense_forces_2022_version.svg" />
                     </IconButton>
                 </Toolbar>
